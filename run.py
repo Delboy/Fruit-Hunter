@@ -2,6 +2,7 @@ import gspread
 from google.oauth2.service_account import Credentials
 import os
 import sys
+import time
 
 """
 code taken from love-sandwiches project.
@@ -32,26 +33,29 @@ def welcome():
     Displays the welcome message.
     Directs user to create user or log in functions
     """
+    clear_console()
     print('{:^80}'.format('Welcome to FRUIT HUNTER!'))
     print(BR * 4)
-    while True:
-        user_choice = input(' ' * 25 + 'Have you played before? Y/N: ')
-        if user_choice.upper() == 'Y':
-            clear_console()
-            # direct to log in function
-            break
-        elif user_choice.upper() == 'N':
-            os.system('cls' if os.name == 'nt' else 'clear')
-            create_user()
-            break
-        elif user_choice.upper() == 'X':
-            os.system('cls' if os.name == 'nt' else 'clear')
-            sys.exit()
-        else:
-            clear_console()
-            print(BR4)
-            print(C('Must choose Y or N or type X to exit.'))
-            print(print(BR4))
+    user_choice = input(' ' * 25 + 'Have you played before? Y/N: ')
+    # while (user_choice.upper() != 'Y') or (user_choice.upper() != 'N'):
+    #     clear_console()
+    #     print(BR * 4)
+    #     print(C('You must choose Y or N or type X to exit.'))
+    #     user_choice = input(' ' * 25 + 'Have you played before? Y/N: ')
+    if user_choice.upper() == 'Y':
+        clear_console()
+        login()
+    elif user_choice.upper() == 'N':
+        clear_console()
+        create_user()
+    elif user_choice.upper() == 'X':
+        sys.exit()
+    else:
+        clear_console()
+        print(BR * 4)
+        print(C('You must choose either Y or N or type X to exit.'))
+        time.sleep(3)
+        welcome()
 
 
 def create_user():
@@ -104,10 +108,11 @@ def create_user():
         WKS.append_row(new_user)
         clear_console()
         print(BR * 2)
-        print(C('Congrats. User created! Your log in details are:')) 
+        print(C('Success! User created! Your log in details are:')) 
         print(C(f'User Name: {user_name}'))
-        print(C(f'PIN: {user_pin}'))  
-        # log_in_user()
+        print(C(f'PIN: {user_pin}'))
+        time.sleep(3)  
+        login()
     else:
         create_user()
 
@@ -118,6 +123,53 @@ TODO create login function.
     Once logged in gets users info and creates a usernumber variable that is used when updating users info.
     Checks if any fruits have already been collected and if so deletes them from the fruit list.
 """
+
+def login():
+    """
+    Logs in the user.
+    """
+    users = WKS.col_values(1)
+    clear_console()
+    print(BR * 4)
+    print(C('Please log in'))
+    user_name = input(' ' * 32 + 'User Name: ').lower()
+    if user_name in users:
+        clear_console()
+        print(BR *4)
+        pin_input = input(' ' * 29 + 'Please enter PIN: ')
+        row_number = users.index(user_name) + 1
+        users_info = WKS.row_values(row_number)
+        users_pin = users_info[1]
+        clear_console()
+        if pin_input == users_pin:
+            clear_console()
+            print(BR * 4)
+            print(C('Login successfull'))
+            time.sleep(2)
+            global user_num
+            user_num = row_number
+            # check fruits function(user_num)
+        else:
+            clear_console()
+            print(BR *4)
+            print(C('Sorry the PIN is not correct. Please try again.'))
+            time.sleep(3)
+            login()
+    else:
+        clear_console()
+        print(BR * 4)
+        user_input = input(' ' * 4 + 'That username does not exist. Would you like to create a user login? Y/N: ')
+        if user_input.upper() == 'Y':
+            create_user()
+        elif user_input.upper() == 'N':
+            login()
+        else:
+            clear_console()
+            print(BR * 4)
+            print(C(f'{user_input.upper()} is not a valid input. Returning to login.'))
+            time.sleep(2)
+            login()
+
 
 """
 TODO Main menu function
