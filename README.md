@@ -1,31 +1,54 @@
-![CI logo](https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png)
+# Fruit Hunter
 
-Welcome Delboy,
+Fruit hunter is a Python terminal game, which runs on a mock terminal on Heroku.
 
-This is the Code Institute student template for deploying your third portfolio project, the Python command-line project. The last update to this file was: **August 17, 2021**
+User's try to find all the fruit by playing a hangman style game.
 
-## Reminders
+## How to play
 
-* Your code must be placed in the `run.py` file
-* Your dependencies must be placed in the `requirements.txt` file
-* Do not edit any of the other files or your code may not deploy properly
+Fruit Hunter is based on the classic game hangman except every word to be guessed is a fruit. There are 'x' different fruits to find. Each time the user guesses a new fruit it is added to their collection. Once all fruits are collected the game is won.
 
-## Creating the Heroku app
+## Design 
 
-When you create the app, you will need to add two buildpacks from the _Settings_ tab. The ordering is as follows:
+I used [lucidchart.com](https://lucid.co/) to help design the project and create the following flow charts. 
 
-1. `heroku/python`
-2. `heroku/nodejs`
+### The main menu flow chart :
+![Main Flow Chart](readme-assets/images/main-flow.png)
 
-You must then create a _Config Var_ called `PORT`. Set this to `8000`
+### The gameplay flow chart :
+![Gameplay Flow Chart](readme-assets/images/game-flow.png)
 
-If you have credentials, such as in the Love Sandwiches project, you must create another _Config Var_ called `CREDS` and paste the JSON into the value field.
+## Features
 
-Connect your GitHub repository and deploy as normal.
+### Create user page
+- The create user page prompts the user to create a log-in username and a 4 digit pin code.
+- It will check to make sure the username is not already taken before completing.
+- It will also verify the user's pin code before allowing the user's info to be created.
 
-## Constraints
+### Log in page
+- The log in page will ask the user for their log in name and pin code.
+- If the user's name does not exist it will direct the user to the create user page.
+- Once logged in the programme will grab the user's details and create certain variables with them such as the row number they are in the google spreadsheet and the fruits they've already collected if the user has played before.
 
-The deployment terminal is set to 80 columns by 24 rows. That means that each line of text needs to be 80 characters or less otherwise it will be wrapped onto a second line.
+### Main menu
+- The main menu will have 5 options to direct the user to where they want to go.
 
------
-Happy coding!
+### Fruits collected page
+- The fruits collected page will display a list of all the fruits the user has collected if any, and inform the user how many more fruits they have yet to find.
+
+### Hall of fame page
+- The hall of fame page shows a list of the top 5 user's that have collected all fruit.
+- The list will order the user's from least amount of attempts to most.
+
+### Random fruit generator
+- The random fruit generator generates a random fruit from any remaining fruit left to be found.
+
+### Game play 
+- The game consists of underscores representing how many letters are left to discover in the word.
+- A lives display which shows filled hearts which deplete when an incorrect answer is given.
+- A user input area where the user inputs their answers.
+
+### Lives display
+- The lives display shows 5 hearts representing 1 life.
+- When a life is lost one heart will turn into an empty heart.
+- When all lives are lost the game is over.
