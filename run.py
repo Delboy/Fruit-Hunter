@@ -1,5 +1,7 @@
 import gspread
 from google.oauth2.service_account import Credentials
+import os
+import sys
 
 """
 code taken from love-sandwiches project.
@@ -14,13 +16,36 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('fruit_hunter')
+BR = '\n'
+C = '{:^80}'.format
 
-"""
-TODO welcome message function.
-    Creates welcome message. 
-    Asks if player has played before.
-    Directs to either create user or login function.
-"""
+
+def clear_console():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
+def welcome():
+    print('{:^80}'.format('Welcome to FRUIT HUNTER!'))
+    print(BR * 4)
+    while True:
+        user_choice = input(' ' * 25 + 'Have you played before? Y/N: ')
+        if user_choice.upper() == 'Y':
+            clear_console()
+            # direct to log in function
+            break
+        elif user_choice.upper() == 'N':
+            os.system('cls' if os.name == 'nt' else 'clear')
+            # direct to create user function
+            break
+        elif user_choice.upper() == 'X':
+            os.system('cls' if os.name == 'nt' else 'clear')
+            sys.exit()
+        else:
+            clear_console()
+            print(BR * 4)
+            print(C('Must choose Y or N or type X to exit.'))
+            print(BR)
+
 
 """
 TODO create user function.
@@ -58,10 +83,6 @@ TODO remove fruit function
     Removes fruit from fruit list.
 """
 
-"""
-TODO clear console function
-    Clears the console.
-"""
 
 """
 TODO Check fruits collected function
@@ -72,3 +93,5 @@ TODO Check fruits collected function
 TODO Hall of fame function
     Displays users that have collected all fruit and lists how many attempts it took them.
 """
+
+welcome()
