@@ -16,15 +16,22 @@ CREDS = Credentials.from_service_account_file('creds.json')
 SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('fruit_hunter')
-BR = '\n'
+WKS = SHEET.worksheet("users")
 C = '{:^80}'.format
-
+BR = '\n'
 
 def clear_console():
+    """
+    Clears the consoe.
+    """
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
 def welcome():
+    """
+    Displays the welcome message.
+    Directs user to create user or log in functions
+    """
     print('{:^80}'.format('Welcome to FRUIT HUNTER!'))
     print(BR * 4)
     while True:
@@ -35,25 +42,75 @@ def welcome():
             break
         elif user_choice.upper() == 'N':
             os.system('cls' if os.name == 'nt' else 'clear')
-            # direct to create user function
+            create_user()
             break
         elif user_choice.upper() == 'X':
             os.system('cls' if os.name == 'nt' else 'clear')
             sys.exit()
         else:
             clear_console()
-            print(BR * 4)
+            print(BR4)
             print(C('Must choose Y or N or type X to exit.'))
-            print(BR)
+            print(print(BR4))
 
 
-"""
-TODO create user function.
-    Creates a user.
-    Checks if username already exists.
-    Verifies if pin is correct.
-    If successfull directs user to log in page.
-"""
+def create_user():
+    """
+    Creates user log-in. 
+    """
+    users = WKS.col_values(1)
+    clear_console()
+    print(BR * 4)
+    # Creates username
+    user_name = input(' ' * 27 + 'Please choose a username: ')
+    while (len(user_name) > 15) or (user_name in users):
+        if len(user_name) > 15:
+            clear_console()
+            print(BR * 4)
+            print(C('Sorry, that name is too long. Please keep under 15 characters.'))
+            user_name = input(' ' * 27 + 'Please choose a username: ')
+        if user_name in users:
+            clear_console()
+            print(BR * 4)
+            print(C('Sorry, that name is taken. Please try again'))
+            user_name = input(' ' * 27 + 'Please choose a username: ')
+    clear_console()
+    print(BR * 4)
+    print(C(f'You chose the username {user_name.capitalize()}. Is this correct?'))
+    validate_name = input(' ' * 37 + 'Y/N: ')
+    # Creates user's PIN number
+    if validate_name.upper() == 'Y':
+        clear_console()
+        print(BR * 4)
+        print(C('Please choose four digit PIN number: '))
+        user_pin = input(' ' * 37 + 'PIN: ')
+        while (user_pin.isdecimal() == False) or (len(user_pin) != 4):
+            clear_console()
+            print(BR * 4)
+            print(C('Sorry, the PIN must be four digits long and only consist of numbers. Please try again.'))
+            user_pin = input(' ' * 37 + 'PIN: ')
+        clear_console()
+        print(BR * 4)
+        verify_pin = input(' ' * 28 + 'Please verify the PIN: ')
+        while user_pin != verify_pin:
+            clear_console()
+            print(BR * 4)
+            print(C('Sorry, the pins do not match. Please try again.'))
+            user_pin = input(' ' * 34 + 'Input PIN: ')
+            clear_console()
+            print(BR * 4)
+            verify_pin = input(' ' * 34 +'Verify PIN: ')
+        new_user = [user_name.lower(), user_pin,'',0 ]   
+        WKS.append_row(new_user)
+        clear_console()
+        print(BR * 2)
+        print(C('Congrats. User created! Your log in details are:')) 
+        print(C(f'User Name: {user_name}'))
+        print(C(f'PIN: {user_pin}'))  
+        # log_in_user()
+    else:
+        create_user()
+
 
 """
 TODO create login function.
