@@ -65,7 +65,7 @@ def create_user():
     print(BR * 4)
     # Creates username
     user_name = input(' ' * 27 + 'Please choose a username: ')
-    while (len(user_name) > 15) or (user_name in users):
+    while (len(user_name) > 15) or (user_name in users) or (user_name == ''):
         if len(user_name) > 15:
             clear_console()
             print(BR * 4)
@@ -75,6 +75,11 @@ def create_user():
             clear_console()
             print(BR * 4)
             print(C('Sorry, that name is taken. Please try again'))
+            user_name = input(' ' * 27 + 'Please choose a username: ')
+        if user_name == '':
+            clear_console()
+            print(BR * 4)
+            print(C('Sorry, tha name cannot be blank. Please try again'))
             user_name = input(' ' * 27 + 'Please choose a username: ')
     clear_console()
     print(BR * 4)
@@ -177,17 +182,17 @@ def check_fruits(user_num):
     global fruits 
     fruits = ['apple', 'banana', 'pear']
     user_info = WKS.row_values(user_num)
+    global fruits_collected
     fruits_collected = user_info[2]
+    global fruits_coll_li
     fruits_coll_li = list(fruits_collected.split(" "))
     new_list = []
     for fruit in fruits:
         if fruit not in fruits_coll_li:
             new_list.append(fruit)
-    fruits = new_list
-    # play game function
-    
-
-
+    global user_fruits
+    user_fruits = new_list
+    menu()
 
 
 """
@@ -195,6 +200,33 @@ TODO Main menu function
     Lists the options play, rules, collected fruits, hall of fame and exit.
     Directs user to option chosen.
 """
+
+def menu():
+    clear_console()
+    print(C('MENU'))
+    print(BR)
+    print(C('1. Play'))
+    print(C('2. Rules'))
+    print(C('3. Fruits Collected'))
+    print(C('4. Hall of Fame'))
+    print(C('5. Exit'))
+    user_input = input(' ' * 40)
+    if user_input == '1':
+        play()
+    elif user_input == '2':
+        rules()
+    elif user_input == '3':
+        fruit_li()
+    elif user_input == '4':
+        hof()
+    elif user_input == '5':
+        sys.exit()
+    else:
+        clear_console()
+        print(C('Sorry that input has not been recognised. Please try again.'))
+        time.sleep(2)
+        menu()
+
 
 """
 TODO run game function.
