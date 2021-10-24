@@ -120,13 +120,6 @@ def create_user():
         create_user()
 
 
-"""
-TODO create login function.
-    Ask user for login in name and pin.
-    Once logged in gets users info and creates a usernumber variable that is used when updating users info.
-    Checks if any fruits have already been collected and if so deletes them from the fruit list.
-"""
-
 def login():
     """
     Logs in the user.
@@ -190,16 +183,10 @@ def check_fruits(user_num):
     for fruit in fruits:
         if fruit not in fruits_coll_li:
             new_list.append(fruit)
-    global user_fruits
-    user_fruits = new_list
+    global fruits_left
+    fruits_left = new_list
     menu()
 
-
-"""
-TODO Main menu function
-    Lists the options play, rules, collected fruits, hall of fame and exit.
-    Directs user to option chosen.
-"""
 
 def menu():
     clear_console()
@@ -223,6 +210,7 @@ def menu():
         sys.exit()
     else:
         clear_console()
+        print(BR * 4)
         print(C('Sorry that input has not been recognised. Please try again.'))
         time.sleep(2)
         menu()
@@ -238,10 +226,44 @@ TODO random fruit generator function
     Generates a random fruit from fruit list.
 """
 
-"""
-TODO remove fruit function
-    Removes fruit from fruit list.
-"""
+def fruit_li():
+    """
+    Prints out a list of all fruits found by the user if any.
+    Enables the user to reset the list if all fruits have been found.
+    """
+    clear_console()
+    print(C('Fruits Collected'))
+    print(BR)
+    if len(fruits_coll_li) == len(fruits):
+        print(C('Well done! You have collected all the fruits and been entered into the hall of fame!'))
+        user_input = input(' ' * 20 + 'Would you like to reset the list? Y/N: ')
+        if user_input.upper() == 'Y':
+            fruits_left = fruits
+            WKS.update_cell(user_num,3,'')
+            clear_console()
+            print(4 * BR)
+            print(C('List has been reset. Returning to main menu.'))
+            time.sleep(2)
+            check_fruits(user_num)
+        elif user_input.upper == 'N':
+            print(C("You selected 'NO'. Returning to the main menu"))
+            time.sleep(2)
+            menu()
+        else:
+            print(C("That character was not recogised. Returning to the main menu"))
+            time.sleep(2)
+            menu()
+    elif fruits_collected == '':
+        print(C("Sorry, you havn't collected any fruits yet!"))
+        user_input = input(' ' * 22 + 'Enter Y to return to the main menu: ')
+        if user_input.upper() == 'Y':
+            menu();
+        else:
+            fruit_li()
+    else:
+        print(C(f'There are {len(fruits)} fruits to collect. You have found {len(fruits_coll_li)}! '))
+        print(C('You have already found: ' + fruits_collected.upper()))
+
 
 """
 TODO Hall of fame function
