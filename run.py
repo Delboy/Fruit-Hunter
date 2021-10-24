@@ -226,6 +226,28 @@ TODO random fruit generator function
     Generates a random fruit from fruit list.
 """
 
+def rules():
+    """
+    Displays the rules of the game to the user
+    """
+    clear_console()
+    phrases = ['The aim of Fruit Hunter is to gather all the fruit!',
+    'Fruit is gathered by trying to guess which name of the fruit is being displayed',
+    'You can guess one letter at a time or try and guess the whole word',
+    'The player has five lives. Incorrect guesses will lose you 1 life',
+    'If all lives are lost you lose the game',
+    "But dont worry as any fruit you've already found are saved!",
+    'If you discover all the fruit you win the game and get entered into the hall of fame!',
+    'Happy hunting!']
+    for x in phrases:
+        clear_console()
+        print(C('RULES'))
+        print(BR)
+        print((C(x)))
+        time.sleep(4)
+    menu()
+
+
 def fruit_li():
     """
     Prints out a list of all fruits found by the user if any.
@@ -257,12 +279,18 @@ def fruit_li():
         print(C("Sorry, you havn't collected any fruits yet!"))
         user_input = input(' ' * 22 + 'Enter Y to return to the main menu: ')
         if user_input.upper() == 'Y':
-            menu();
+            menu()
         else:
             fruit_li()
     else:
         print(C(f'There are {len(fruits)} fruits to collect. You have found {len(fruits_coll_li)}! '))
         print(C('You have already found: ' + fruits_collected.upper()))
+        print(BR)
+        user_input = input(' ' * 22 + 'Enter Y to return to the main menu: ')
+        if user_input.upper() == 'Y':
+            menu()
+        else:
+            fruit_li()
 
 
 """
