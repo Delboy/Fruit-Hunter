@@ -18,12 +18,15 @@ SCOPED_CREDS = CREDS.with_scopes(SCOPE)
 GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
 SHEET = GSPREAD_CLIENT.open('fruit_hunter')
 WKS = SHEET.worksheet("users")
+HOF = SHEET.worksheet("hof")
 C = '{:^80}'.format
 BR = '\n'
 
+
+
 def clear_console():
     """
-    Clears the consoe.
+    Clears the console.
     """
     os.system('cls' if os.name == 'nt' else 'clear')
 
@@ -37,11 +40,6 @@ def welcome():
     print('{:^80}'.format('Welcome to FRUIT HUNTER!'))
     print(BR * 4)
     user_choice = input(' ' * 25 + 'Have you played before? Y/N: ')
-    # while (user_choice.upper() != 'Y') or (user_choice.upper() != 'N'):
-    #     clear_console()
-    #     print(BR * 4)
-    #     print(C('You must choose Y or N or type X to exit.'))
-    #     user_choice = input(' ' * 25 + 'Have you played before? Y/N: ')
     if user_choice.upper() == 'Y':
         clear_console()
         login()
@@ -148,7 +146,7 @@ def login():
             time.sleep(2)
             global user_num
             user_num = row_number
-            # check fruits function(user_num)
+            check_fruits(user_num)
         else:
             clear_console()
             print(BR *4)
@@ -171,6 +169,27 @@ def login():
             login()
 
 
+
+def check_fruits(user_num):
+    """
+    Checks what fruit the user has already collected if any and removes them from the fruit list.
+    """
+    global fruits 
+    fruits = ['apple', 'banana', 'pear']
+    user_info = WKS.row_values(user_num)
+    fruits_collected = user_info[2]
+    fruits_coll_li = list(fruits_collected.split(" "))
+    new_list = []
+    for fruit in fruits:
+        if fruit not in fruits_coll_li:
+            new_list.append(fruit)
+    fruits = new_list
+    # play game function
+    
+
+
+
+
 """
 TODO Main menu function
     Lists the options play, rules, collected fruits, hall of fame and exit.
@@ -190,12 +209,6 @@ TODO random fruit generator function
 """
 TODO remove fruit function
     Removes fruit from fruit list.
-"""
-
-
-"""
-TODO Check fruits collected function
-    Checks what fruits has been collected and prints them in a list.
 """
 
 """
