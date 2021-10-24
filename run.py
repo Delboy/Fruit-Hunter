@@ -3,6 +3,7 @@ from google.oauth2.service_account import Credentials
 import os
 import sys
 import time
+import random
 
 """
 code taken from love-sandwiches project.
@@ -221,10 +222,67 @@ TODO run game function.
     Runs the main game.
 """
 
-"""
-TODO random fruit generator function
-    Generates a random fruit from fruit list.
-"""
+def play():
+    """
+    Plays the game.
+    """
+    clear_console()
+    fruit = random_fruit()
+    lives = 5
+    answer = '_' * len(fruit)
+    guessed = []
+    print(BR * 1)
+    print(C((u'\u2764' + ' ') * lives))
+    print(BR)
+    print(C(answer))
+
+    while lives > 0:
+        
+        guess = input(' ' * 25 + 'Guess the fruit or a letter: ')
+        if len(guess) == 1:
+            if guess.upper() not in fruit:
+                clear_console()
+                lives -= 1
+                guessed.append(guess)
+                print(BR * 1)
+                lives_left = life_lost(lives)
+                print(C(lives_left))
+                print(BR)
+                print(C(answer))
+                print(C(f'Sorry, {guess} is not in the word. Try again.'))
+    if lives == 0:
+        clear_console()
+        # Updates times user has died on googlesheet. Info used for Hall of fame leaderboard.
+        user_info = WKS.row_values(user_num)
+        user_deaths = int(user_info[3])
+        user_deaths += 1
+        WKS.update_cell(user_num,4,user_deaths)
+        print(BR * 4)
+        print(C('Oh no! You\'ve lost all your lives!'))
+        user_input = input(' ' * 12 + 'Press Y to play again or N to go back to the main menu: ')
+        while True:
+            if user_input.upper() == 'Y':
+                play()
+            elif user_input.upper() == 'N':
+                menu()
+            else:
+                clear_console()
+                print(BR * 4)
+                print(C('Sorry, that character is not recognised. Please input Y to play again or N to return to the main menu.'))
+                user_input = input(' ' * 39 + ': ')
+
+
+def random_fruit():
+    """
+    Generates a random fruit from the fruits left to find.
+    """
+    fruit = random.choice(fruits_left)
+    return fruit.upper()
+
+
+def life_lost(lives):
+    lost_lives = 5 - lives
+    return ((u'\u2764' + ' ') * lives) + ((u'\u2661' + ' ') * lost_lives)
 
 def rules():
     """
