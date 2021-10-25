@@ -171,7 +171,7 @@ def login():
 
 def check_fruits(user_num):
     """
-    Checks what fruit the user has already collected if any and removes them from the fruit list.
+    Checks what fruit the user has already collected if any and removes them from the fruits to find list.
     """
     global fruits 
     fruits = ['apple', 'banana', 'pear']
@@ -228,28 +228,46 @@ def play():
     """
     clear_console()
     fruit = random_fruit()
+    global lives
     lives = 5
+    global answer
     answer = '_' * len(fruit)
     guessed = []
     print(BR * 1)
     print(C((u'\u2764' + ' ') * lives))
     print(BR)
     print(C(answer))
+    print(C(BR))
 
     while lives > 0:
         
-        guess = input(' ' * 25 + 'Guess the fruit or a letter: ')
-        if len(guess) == 1:
-            if guess.upper() not in fruit:
+        guess = input(' ' * 25 + 'Guess the fruit or a letter: ').upper()
+        if len(guess) == 1 and guess.isalpha():
+            if guess in guessed:
+                clear_console()
+                update_game_screen(f"You've already guessed {guess}. Please try again.")
+                # print(C(f"You've already guessed {guess}. Please try again."))
+            elif guess not in fruit:
                 clear_console()
                 lives -= 1
                 guessed.append(guess)
-                print(BR * 1)
-                lives_left = life_lost(lives)
-                print(C(lives_left))
-                print(BR)
-                print(C(answer))
-                print(C(f'Sorry, {guess} is not in the word. Try again.'))
+                update_game_screen(f'Sorry, {guess} is not in the word. Try again.')
+                # lives_left = life_lost(lives)
+                # print(BR * 1)
+                # print(C(lives_left))
+                # print(BR)
+                # print(C(answer))
+                # print(C(f'Sorry, {guess} is not in the word. Try again.'))
+            elif guess in fruit:
+                print('success')
+                guessed.append(guess)
+            else:
+                print('error')
+        else:
+            if guess == fruit:
+                print('correct')
+            else:
+                print('incorrect')  
     if lives == 0:
         clear_console()
         # Updates times user has died on googlesheet. Info used for Hall of fame leaderboard.
@@ -271,6 +289,19 @@ def play():
                 print(C('Sorry, that character is not recognised. Please input Y to play again or N to return to the main menu.'))
                 user_input = input(' ' * 39 + ': ')
 
+def update_game_screen(msg):
+    """
+    Updates the lives, answer and message on the game screen.
+    """
+    clear_console()
+    lost_lives = 5 - lives
+    print(BR * 1)
+    print(C(((u'\u2764' + ' ') * lives) + ((u'\u2661' + ' ') * lost_lives)))
+    print(BR)
+    print(C(answer))
+    print(BR)
+    print(C(msg))
+    # print(BR)
 
 def random_fruit():
     """
@@ -279,10 +310,6 @@ def random_fruit():
     fruit = random.choice(fruits_left)
     return fruit.upper()
 
-
-def life_lost(lives):
-    lost_lives = 5 - lives
-    return ((u'\u2764' + ' ') * lives) + ((u'\u2661' + ' ') * lost_lives)
 
 def rules():
     """
