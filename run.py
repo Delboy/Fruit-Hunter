@@ -5,6 +5,7 @@ import sys
 import time
 import random
 
+
 """
 code taken from love-sandwiches project.
 """
@@ -397,8 +398,8 @@ def fruit_li():
     clear_console()
     print(C('Fruits Collected'))
     print(BR)
-    # Greater sign used here instead of equals because the list will always start with an empty string which the game reads as one entry.
-    if len(fruits_coll_li) > len(fruits):
+    
+    if len(fruits_coll_li) > len(fruits): # Greater sign used here instead of equals because the list will always start with an empty string which the game reads as one entry.
         print(C('Well done!')) 
         print(C('You have collected all the fruits and been entered into the hall of fame!'))
         user_input = input(' ' * 20 + 'Would you like to reset the list? Y/N: ')
@@ -447,6 +448,30 @@ def add_to_hof(user_num):
     users_deaths = users_info[3]
     hof_info = [user_name.lower(), users_deaths]   
     HOF.append_row(hof_info)
+
+def display_hof():
+    """
+    Displays the top five people in the hall of fame.
+    """
+    clear_console()
+    all = HOF.get_all_values()
+    all.pop(0)
+    all.sort(key = lambda all: all[1]) # Took this line from https://www.geeksforgeeks.org/python-sort-list-of-list-by-specified-index/
+    if len(all) < 5:
+        for x in range(5 - len(all)):
+            all.append(['_____', '__'])
+    print(C('HALL OF FAME'))
+    print(BR)
+    index = 1
+    for x in all:
+        print(' ' * 27 + str(index), ': ' + str(x[0].capitalize()) + '  -  Deaths: ' + str(x[1]))
+        index += 1
+    print(BR)
+    user_input = input(' ' * 22 + 'Enter Y to return to the main menu: ')
+    if user_input.upper() == 'Y':
+        menu()
+    else:
+        display_hof()
 
 
 
