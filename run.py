@@ -115,6 +115,7 @@ def create_user():
         print(C('Success! User created! Your log in details are:')) 
         print(C(f'User Name: {user_name.capitalize()}'))
         print(C(f'PIN: {user_pin}'))
+        print(C('Directing you to log-in...'))
         time.sleep(3)  
         login()
     else:
@@ -206,7 +207,7 @@ def menu():
     elif user_input == '3':
         fruit_li()
     elif user_input == '4':
-        hof()
+        display_hof()
     elif user_input == '5':
         sys.exit()
     else:
@@ -286,6 +287,8 @@ def play():
                 WKS.update_cell(user_num,3,updated_fruits)
                 check_fruits(user_num)
                 answer = fruit
+                if len(fruits_coll_li) == len(fruits):
+                    add_to_hof(user_num)
                 update_game_screen(f'Success! You found a {fruit}. It has been added to your basket.')
                 user_input = input(' ' * 12 + 'Press Y to play again or N to go back to the main menu: ')
                 while True:
@@ -305,6 +308,10 @@ def play():
             updated_fruits = f'{fruits_collected} {fruit.lower()}'
             WKS.update_cell(user_num,3,updated_fruits)
             check_fruits(user_num)
+            if len(fruits_coll_li) == len(fruits):
+                add_to_hof(user_num)
+                clear_console()
+                
             update_game_screen(f'Success! You found a {fruit}. It has been added to your basket.')
             user_input = input(' ' * 12 + 'Press Y to play again or N to go back to the main menu: ')
             while True:
@@ -431,9 +438,16 @@ def fruit_li():
             fruit_li()
 
 
-"""
-TODO Hall of fame function
-    Displays users that have collected all fruit and lists how many attempts it took them.
-"""
+def add_to_hof(user_num):
+    """
+    Adds users name and death count to hall of fame worksheet
+    """
+    users_info = WKS.row_values(user_num)
+    user_name = users_info[0]
+    users_deaths = users_info[3]
+    hof_info = [user_name.lower(), users_deaths]   
+    HOF.append_row(hof_info)
+
+
 
 welcome()
