@@ -113,7 +113,7 @@ def create_user():
         clear_console()
         print(BR * 2)
         print(C('Success! User created! Your log in details are:')) 
-        print(C(f'User Name: {user_name}'))
+        print(C(f'User Name: {user_name.capitalize()}'))
         print(C(f'PIN: {user_pin}'))
         time.sleep(3)  
         login()
@@ -168,7 +168,6 @@ def login():
             login()
 
 
-
 def check_fruits(user_num):
     """
     Checks what fruit the user has already collected if any and removes them from the fruits to find list.
@@ -188,7 +187,6 @@ def check_fruits(user_num):
             new_list.append(fruit)
     global fruits_left
     fruits_left = new_list
-    
 
 
 def menu():
@@ -219,15 +217,34 @@ def menu():
         menu()
 
 
-"""
-TODO run game function.
-    Runs the main game.
-"""
-
 def play():
     """
     Plays the game.
     """
+    check_fruits(user_num)
+    if len(fruits_coll_li) > len(fruits):
+        clear_console()
+        print(BR * 4)
+        print(C('Oh no! It looks like you\'ve already collected all the fruit!'))
+        print(C('Would you like to reset the list and play again?'))
+        user_input = input(' ' * 37 + 'Y/N: ')
+        if user_input.upper() == 'Y':
+            fruits_left = fruits
+            WKS.update_cell(user_num,3,'')
+            clear_console()
+            print(4 * BR)
+            print(C('List has been reset.'))
+            time.sleep(2)
+            play()
+        elif user_input.upper() == 'N':
+            print(C("You selected 'NO'. Returning to the main menu"))
+            time.sleep(2)
+            menu()
+        else:
+            print(C("That character was not recogised. Returning to the main menu"))
+            time.sleep(2)
+            menu()
+
     check_fruits(user_num)
     clear_console()
     user_info = WKS.row_values(user_num)
@@ -242,9 +259,8 @@ def play():
     print(BR)
     print(C(answer))
     print(C(BR))
-
+    
     while lives > 0:
-        
         guess = input(' ' * 25 + 'Guess the fruit or a letter: ').upper()
         if len(guess) == 1 and guess.isalpha():
             if guess in guessed:
@@ -255,6 +271,12 @@ def play():
                 update_game_screen(f'Sorry, {guess} is not in the word. Try again.')
             elif guess in fruit:
                 guessed.append(guess)
+                answer = ''
+                for x in fruit:
+                    if x in guessed:
+                        answer += str(x)
+                    else:
+                        answer += ('_')
                 update_game_screen(f'Success! The letter {guess} is in the word. Try another.')
             else:
                 update_game_screen('Sorry that character is invalid. Please try again')
@@ -263,6 +285,7 @@ def play():
                 updated_fruits = f'{fruits_collected} {fruit.lower()}'
                 WKS.update_cell(user_num,3,updated_fruits)
                 check_fruits(user_num)
+                answer = fruit
                 update_game_screen(f'Success! You found a {fruit}. It has been added to your basket.')
                 user_input = input(' ' * 12 + 'Press Y to play again or N to go back to the main menu: ')
                 while True:
@@ -276,7 +299,24 @@ def play():
                         print(C('Sorry, that character is not recognised. Please input Y to play again or N to return to the main menu.'))
                         user_input = input(' ' * 39 + ': ')
             else:
-                print('incorrect')  
+                lives -= 1
+                update_game_screen(f'Sorry, {guess} is not the word. Try again.') 
+        if answer == fruit:
+            updated_fruits = f'{fruits_collected} {fruit.lower()}'
+            WKS.update_cell(user_num,3,updated_fruits)
+            check_fruits(user_num)
+            update_game_screen(f'Success! You found a {fruit}. It has been added to your basket.')
+            user_input = input(' ' * 12 + 'Press Y to play again or N to go back to the main menu: ')
+            while True:
+                if user_input.upper() == 'Y':
+                    play()
+                elif user_input.upper() == 'N':
+                    menu()
+                else:
+                    clear_console()
+                    print(BR * 4)
+                    print(C('Sorry, that character is not recognised. Please input Y to play again or N to return to the main menu.'))
+                    user_input = input(' ' * 39 + ': ')
     if lives == 0:
         clear_console()
         # Updates times user has died on googlesheet. Info used for Hall of fame leaderboard.
