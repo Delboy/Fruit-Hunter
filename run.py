@@ -145,7 +145,7 @@ def login():
             time.sleep(2)
             global user_num
             user_num = row_number
-            check_fruits(user_num)
+            menu()
         else:
             clear_console()
             print(BR *4)
@@ -180,13 +180,15 @@ def check_fruits(user_num):
     fruits_collected = user_info[2]
     global fruits_coll_li
     fruits_coll_li = list(fruits_collected.split(" "))
+    if fruits_coll_li[0] == ' ':
+        fruits_coll_li = []
     new_list = []
     for fruit in fruits:
         if fruit not in fruits_coll_li:
             new_list.append(fruit)
     global fruits_left
     fruits_left = new_list
-    menu()
+    
 
 
 def menu():
@@ -226,7 +228,9 @@ def play():
     """
     Plays the game.
     """
+    check_fruits(user_num)
     clear_console()
+    user_info = WKS.row_values(user_num)
     fruit = random_fruit()
     global lives
     lives = 5
@@ -244,34 +248,38 @@ def play():
         guess = input(' ' * 25 + 'Guess the fruit or a letter: ').upper()
         if len(guess) == 1 and guess.isalpha():
             if guess in guessed:
-                clear_console()
                 update_game_screen(f"You've already guessed {guess}. Please try again.")
-                # print(C(f"You've already guessed {guess}. Please try again."))
             elif guess not in fruit:
-                clear_console()
                 lives -= 1
                 guessed.append(guess)
                 update_game_screen(f'Sorry, {guess} is not in the word. Try again.')
-                # lives_left = life_lost(lives)
-                # print(BR * 1)
-                # print(C(lives_left))
-                # print(BR)
-                # print(C(answer))
-                # print(C(f'Sorry, {guess} is not in the word. Try again.'))
             elif guess in fruit:
-                print('success')
                 guessed.append(guess)
+                update_game_screen(f'Success! The letter {guess} is in the word. Try another.')
             else:
-                print('error')
+                update_game_screen('Sorry that character is invalid. Please try again')
         else:
             if guess == fruit:
-                print('correct')
+                updated_fruits = f'{fruits_collected} {fruit.lower()}'
+                WKS.update_cell(user_num,3,updated_fruits)
+                check_fruits(user_num)
+                update_game_screen(f'Success! You found a {fruit}. It has been added to your basket.')
+                user_input = input(' ' * 12 + 'Press Y to play again or N to go back to the main menu: ')
+                while True:
+                    if user_input.upper() == 'Y':
+                        play()
+                    elif user_input.upper() == 'N':
+                        menu()
+                    else:
+                        clear_console()
+                        print(BR * 4)
+                        print(C('Sorry, that character is not recognised. Please input Y to play again or N to return to the main menu.'))
+                        user_input = input(' ' * 39 + ': ')
             else:
                 print('incorrect')  
     if lives == 0:
         clear_console()
         # Updates times user has died on googlesheet. Info used for Hall of fame leaderboard.
-        user_info = WKS.row_values(user_num)
         user_deaths = int(user_info[3])
         user_deaths += 1
         WKS.update_cell(user_num,4,user_deaths)
@@ -338,11 +346,14 @@ def fruit_li():
     Prints out a list of all fruits found by the user if any.
     Enables the user to reset the list if all fruits have been found.
     """
+    check_fruits(user_num)
     clear_console()
     print(C('Fruits Collected'))
     print(BR)
-    if len(fruits_coll_li) == len(fruits):
-        print(C('Well done! You have collected all the fruits and been entered into the hall of fame!'))
+    # Greater sign used here instead of equals because the list will always start with an empty string which the game reads as one entry.
+    if len(fruits_coll_li) > len(fruits):
+        print(C('Well done!')) 
+        print(C('You have collected all the fruits and been entered into the hall of fame!'))
         user_input = input(' ' * 20 + 'Would you like to reset the list? Y/N: ')
         if user_input.upper() == 'Y':
             fruits_left = fruits
@@ -351,8 +362,8 @@ def fruit_li():
             print(4 * BR)
             print(C('List has been reset. Returning to main menu.'))
             time.sleep(2)
-            check_fruits(user_num)
-        elif user_input.upper == 'N':
+            menu()
+        elif user_input.upper() == 'N':
             print(C("You selected 'NO'. Returning to the main menu"))
             time.sleep(2)
             menu()
@@ -368,8 +379,10 @@ def fruit_li():
         else:
             fruit_li()
     else:
-        print(C(f'There are {len(fruits)} fruits to collect. You have found {len(fruits_coll_li)}! '))
-        print(C('You have already found: ' + fruits_collected.upper()))
+        # The lengthe of fruits_coll_li has to have one subtracted to account for the empty string that is input when the list is created.
+        print(C(f'There are {len(fruits)} fruits to collect. You have found {(len(fruits_coll_li) - 1)}! '))
+        print(C('You have already found:'))
+        print(C(fruits_collected.upper()))
         print(BR)
         user_input = input(' ' * 22 + 'Enter Y to return to the main menu: ')
         if user_input.upper() == 'Y':
