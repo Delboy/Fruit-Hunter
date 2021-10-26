@@ -288,6 +288,8 @@ def play():
                 update_game_screen(f'Success! The letter {guess} is in the word. Try another.')
             else:
                 update_game_screen('Sorry that character is invalid. Please try again')
+        elif guess == '':
+            update_game_screen('Whoops! Look like you dont submit an answer. Try again.')
         else:
             if guess == fruit:
                 updated_fruits = f'{fruits_collected} {fruit.lower()}'
