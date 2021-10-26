@@ -39,6 +39,7 @@ def welcome():
     Directs user to create user or log in functions
     """
     clear_console()
+    print(BR * 4)
     print('{:^80}'.format('Welcome to FRUIT HUNTER!'))
     print(BR * 4)
     user_choice = input(' ' * 25 + 'Have you played before? Y/N: ')
@@ -64,7 +65,7 @@ def create_user():
     """
     users = WKS.col_values(1)
     clear_console()
-    print(BR * 4)
+    print(BR * 8)
     # Creates username
     user_name = input(' ' * 27 + 'Please choose a username: ')
     while (len(user_name) > 15) or (user_name in users) or (user_name == ''):
@@ -129,7 +130,7 @@ def login():
     """
     users = WKS.col_values(1)
     clear_console()
-    print(BR * 4)
+    print(BR * 8)
     print(C('Please log in'))
     user_name = input(' ' * 32 + 'User Name: ').lower()
     if user_name in users:
@@ -193,6 +194,7 @@ def check_fruits(user_num):
 
 def menu():
     clear_console()
+    print(BR * 4)
     print(C('MENU'))
     print(BR)
     print(C('1. Play'))
@@ -259,7 +261,7 @@ def play():
     global answer
     answer = '_' * len(fruit)
     guessed = []
-    print(BR * 1)
+    print(BR * 6)
     print(C((u'\u2764' + ' ') * lives))
     print(BR)
     print(C(answer))
@@ -355,7 +357,7 @@ def update_game_screen(msg):
     """
     clear_console()
     lost_lives = 5 - lives
-    print(BR * 1)
+    print(BR * 6)
     print(C(((u'\u2764' + ' ') * lives) + ((u'\u2661' + ' ') * lost_lives)))
     print(BR)
     print(C(answer))
@@ -396,6 +398,7 @@ def rules():
     'Happy hunting!']
     for x in phrases:
         clear_console()
+        print(BR * 4)
         print(C('HOW TO PLAY'))
         print(BR)
         print((C(x)))
@@ -410,6 +413,7 @@ def fruit_li():
     """
     check_fruits(user_num)
     clear_console()
+    print(BR * 4)
     print(C('Fruits Collected'))
     print(BR)
     
@@ -480,6 +484,7 @@ def display_hof():
     if len(all) < 5:
         for x in range(5 - len(all)):
             all.append(['_____', '__', '__']) # This is to stop the game from throwing an error when trying to obtain info from google sheets that is not there.
+    print(BR * 4)
     print(C('HALL OF FAME'))
     print(BR)
     index = 1
