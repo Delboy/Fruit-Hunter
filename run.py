@@ -259,7 +259,7 @@ def play():
     global lives
     lives = 5
     global answer
-    answer = '_' * len(fruit)
+    answer = '_ ' * len(fruit)
     guessed = []
     print(BR * 6)
     print(C((u'\u2764' + ' ') * lives))
@@ -282,9 +282,9 @@ def play():
                 answer = ''
                 for x in fruit:
                     if x in guessed:
-                        answer += str(x)
+                        answer += str(x + ' ')
                     else:
-                        answer += ('_')
+                        answer += ('_ ')
                 update_game_screen(f'Success! The letter {guess} is in the word. Try another.')
             else:
                 update_game_screen('Sorry that character is invalid. Please try again')
