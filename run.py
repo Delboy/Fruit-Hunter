@@ -71,44 +71,44 @@ def create_user():
     while (len(user_name) > 15) or (user_name in users) or (user_name == ''):
         if len(user_name) > 15:
             clear_console()
-            print(BR * 4)
+            print(BR * 8)
             print(C('Sorry, that name is too long. Please keep under 15 characters.'))
             user_name = input(' ' * 27 + 'Please choose a username: ')
         if user_name in users:
             clear_console()
-            print(BR * 4)
+            print(BR * 8)
             print(C('Sorry, that name is taken. Please try again'))
             user_name = input(' ' * 27 + 'Please choose a username: ')
         if user_name == '':
             clear_console()
-            print(BR * 4)
+            print(BR * 8)
             print(C('Sorry, tha name cannot be blank. Please try again'))
             user_name = input(' ' * 27 + 'Please choose a username: ')
     clear_console()
-    print(BR * 4)
+    print(BR * 8)
     print(C(f'You chose the username {user_name.capitalize()}. Is this correct?'))
     validate_name = input(' ' * 37 + 'Y/N: ')
     # Creates user's PIN number
     if validate_name.upper() == 'Y':
         clear_console()
-        print(BR * 4)
+        print(BR * 8)
         print(C('Please choose four digit PIN number: '))
         user_pin = input(' ' * 37 + 'PIN: ')
         while (user_pin.isdecimal() == False) or (len(user_pin) != 4):
             clear_console()
-            print(BR * 4)
+            print(BR * 8)
             print(C('Sorry, the PIN must be four digits long and only consist of numbers. Please try again.'))
             user_pin = input(' ' * 37 + 'PIN: ')
         clear_console()
-        print(BR * 4)
+        print(BR * 8)
         verify_pin = input(' ' * 28 + 'Please verify the PIN: ')
         while user_pin != verify_pin:
             clear_console()
-            print(BR * 4)
+            print(BR * 8)
             print(C('Sorry, the pins do not match. Please try again.'))
             user_pin = input(' ' * 34 + 'Input PIN: ')
             clear_console()
-            print(BR * 4)
+            print(BR * 6)
             verify_pin = input(' ' * 34 +'Verify PIN: ')
         new_user = [user_name.lower(), user_pin,'',0, 0]   
         WKS.append_row(new_user)
