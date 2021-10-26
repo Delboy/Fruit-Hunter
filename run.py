@@ -196,7 +196,7 @@ def menu():
     print(C('MENU'))
     print(BR)
     print(C('1. Play'))
-    print(C('2. Rules'))
+    print(C('2. How to Play'))
     print(C('3. Fruits Collected'))
     print(C('4. Hall of Fame'))
     print(C('5. Exit'))
@@ -228,6 +228,7 @@ def play():
         clear_console()
         print(BR * 4)
         print(C('Oh no! It looks like you\'ve already collected all the fruit!'))
+        print(C('Check to see if you\'ve reached the hall of fame!'))
         print(C('Would you like to reset the list and play again?'))
         user_input = input(' ' * 37 + 'Y/N: ')
         if user_input.upper() == 'Y':
@@ -294,16 +295,16 @@ def play():
                 if len(fruits_coll_li) == len(fruits):
                     add_to_hof(user_num)
                 update_game_screen(f'Success! You found a {fruit}. It has been added to your basket.')
-                user_input = input(' ' * 12 + 'Press Y to play again or N to go back to the main menu: ')
+                user_input = input(' ' * 7 + 'Press ENTER to play again or type N to go back to the main menu: ')
                 while True:
-                    if user_input.upper() == 'Y':
+                    if user_input == '':
                         play()
                     elif user_input.upper() == 'N':
                         menu()
                     else:
                         clear_console()
                         print(BR * 4)
-                        print(C('Sorry, that character is not recognised. Please input Y to play again or N to return to the main menu.'))
+                        print(C('Sorry, that character is not recognised. Please hit ENTER to play again or N to return to the main menu.'))
                         user_input = input(' ' * 39 + ': ')
             else:
                 lives -= 1
@@ -317,16 +318,16 @@ def play():
                 add_to_hof(user_num)
                 clear_console()  
             update_game_screen(f'Success! You found a {fruit}. It has been added to your basket.')
-            user_input = input(' ' * 12 + 'Press Y to play again or N to go back to the main menu: ')
+            user_input = input(' ' * 7 + 'Press ENTER to play again or type N to go back to the main menu: ')
             while True:
-                if user_input.upper() == 'Y':
+                if user_input == '':
                     play()
                 elif user_input.upper() == 'N':
                     menu()
                 else:
                     clear_console()
                     print(BR * 4)
-                    print(C('Sorry, that character is not recognised. Please input Y to play again or N to return to the main menu.'))
+                    print(C('Sorry, that character is not recognised. Please hit ENTER to play again or N to return to the main menu.'))
                     user_input = input(' ' * 39 + ': ')
     if lives == 0:
         clear_console()
@@ -395,7 +396,7 @@ def rules():
     'Happy hunting!']
     for x in phrases:
         clear_console()
-        print(C('RULES'))
+        print(C('HOW TO PLAY'))
         print(BR)
         print((C(x)))
         time.sleep(4)
@@ -415,6 +416,7 @@ def fruit_li():
     if len(fruits_coll_li) > len(fruits): # Greater sign used here instead of equals because the list will always start with an empty string which the game reads as one entry.
         print(C('Well done!')) 
         print(C('You have collected all the fruits and been entered into the hall of fame!'))
+        print(C(fruits_collected.upper()))
         user_input = input(' ' * 20 + 'Would you like to reset the list? Y/N: ')
         if user_input.upper() == 'Y':
             fruits_left = fruits
@@ -473,6 +475,8 @@ def display_hof():
     all = HOF.get_all_values()
     all.pop(0)
     all.sort(key = lambda all: all[1]) # Took this line from https://www.geeksforgeeks.org/python-sort-list-of-list-by-specified-index/
+    x = slice(5)
+    all = all[x]
     if len(all) < 5:
         for x in range(5 - len(all)):
             all.append(['_____', '__', '__']) # This is to stop the game from throwing an error when trying to obtain info from google sheets that is not there.
@@ -488,7 +492,6 @@ def display_hof():
         menu()
     else:
         display_hof()
-
 
 
 welcome()
