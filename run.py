@@ -109,7 +109,7 @@ def create_user():
             clear_console()
             print(BR * 4)
             verify_pin = input(' ' * 34 +'Verify PIN: ')
-        new_user = [user_name.lower(), user_pin,'',0 ]   
+        new_user = [user_name.lower(), user_pin,'',0, 0]   
         WKS.append_row(new_user)
         clear_console()
         print(BR * 2)
@@ -233,6 +233,8 @@ def play():
         if user_input.upper() == 'Y':
             fruits_left = fruits
             WKS.update_cell(user_num,3,'')
+            WKS.update_cell(user_num,4,0)
+            WKS.update_cell(user_num,5,0)
             clear_console()
             print(4 * BR)
             print(C('List has been reset.'))
@@ -269,6 +271,7 @@ def play():
                 update_game_screen(f"You've already guessed {guess}. Please try again.")
             elif guess not in fruit:
                 lives -= 1
+                lives_lost_counter()
                 guessed.append(guess)
                 update_game_screen(f'Sorry, {guess} is not in the word. Try again.')
             elif guess in fruit:
@@ -304,6 +307,7 @@ def play():
                         user_input = input(' ' * 39 + ': ')
             else:
                 lives -= 1
+                lives_lost_counter()
                 update_game_screen(f'Sorry, {guess} is not the word. Try again.') 
         if answer == fruit:
             updated_fruits = f'{fruits_collected} {fruit.lower()}'
@@ -311,8 +315,7 @@ def play():
             check_fruits(user_num)
             if len(fruits_coll_li) == len(fruits):
                 add_to_hof(user_num)
-                clear_console()
-                
+                clear_console()  
             update_game_screen(f'Success! You found a {fruit}. It has been added to your basket.')
             user_input = input(' ' * 12 + 'Press Y to play again or N to go back to the main menu: ')
             while True:
@@ -367,6 +370,16 @@ def random_fruit():
     return fruit.upper()
 
 
+def lives_lost_counter():
+    """
+    Updates a counter on goolge sheets everytime the player loses a life.
+    """
+    user_info = WKS.row_values(user_num)
+    user_lives_lost = int(user_info[4])
+    user_lives_lost += 1
+    WKS.update_cell(user_num,5, user_lives_lost)
+
+
 def rules():
     """
     Displays the rules of the game to the user
@@ -406,6 +419,8 @@ def fruit_li():
         if user_input.upper() == 'Y':
             fruits_left = fruits
             WKS.update_cell(user_num,3,'')
+            WKS.update_cell(user_num,4,0)
+            WKS.update_cell(user_num,5,0)
             clear_console()
             print(4 * BR)
             print(C('List has been reset. Returning to main menu.'))
@@ -446,7 +461,8 @@ def add_to_hof(user_num):
     users_info = WKS.row_values(user_num)
     user_name = users_info[0]
     users_deaths = users_info[3]
-    hof_info = [user_name.lower(), users_deaths]   
+    users_lives_lost = users_info[4]
+    hof_info = [user_name.lower(), users_lives_lost, users_deaths]   
     HOF.append_row(hof_info)
 
 def display_hof():
@@ -459,12 +475,12 @@ def display_hof():
     all.sort(key = lambda all: all[1]) # Took this line from https://www.geeksforgeeks.org/python-sort-list-of-list-by-specified-index/
     if len(all) < 5:
         for x in range(5 - len(all)):
-            all.append(['_____', '__'])
+            all.append(['_____', '__', '__']) # This is to stop the game from throwing an error when trying to obtain info from google sheets that is not there.
     print(C('HALL OF FAME'))
     print(BR)
     index = 1
     for x in all:
-        print(' ' * 27 + str(index), ': ' + str(x[0].capitalize()) + '  -  Deaths: ' + str(x[1]))
+        print(' ' * 16 + str(index) + ': ', str(x[0].capitalize()) + '  -  Lives Lost: ' + str(x[1]) + '  -  Deaths: ' + str(x[2]))
         index += 1
     print(BR)
     user_input = input(' ' * 22 + 'Enter Y to return to the main menu: ')
