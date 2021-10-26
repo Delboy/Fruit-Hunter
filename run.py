@@ -113,7 +113,7 @@ def create_user():
         new_user = [user_name.lower(), user_pin,'',0, 0]   
         WKS.append_row(new_user)
         clear_console()
-        print(BR * 2)
+        print(BR * 8)
         print(C('Success! User created! Your log in details are:')) 
         print(C(f'User Name: {user_name.capitalize()}'))
         print(C(f'PIN: {user_pin}'))
@@ -135,7 +135,7 @@ def login():
     user_name = input(' ' * 32 + 'User Name: ').lower()
     if user_name in users:
         clear_console()
-        print(BR *4)
+        print(BR *8)
         pin_input = input(' ' * 29 + 'Please enter PIN: ')
         row_number = users.index(user_name) + 1
         users_info = WKS.row_values(row_number)
@@ -143,7 +143,7 @@ def login():
         clear_console()
         if pin_input == users_pin:
             clear_console()
-            print(BR * 4)
+            print(BR * 8)
             print(C('Login successfull'))
             time.sleep(2)
             global user_num
@@ -151,13 +151,13 @@ def login():
             menu()
         else:
             clear_console()
-            print(BR *4)
+            print(BR *8)
             print(C('Sorry the PIN is not correct. Please try again.'))
             time.sleep(3)
             login()
     else:
         clear_console()
-        print(BR * 4)
+        print(BR * 8)
         user_input = input(' ' * 4 + 'That username does not exist. Would you like to create a user login? Y/N: ')
         if user_input.upper() == 'Y':
             create_user()
@@ -165,7 +165,7 @@ def login():
             login()
         else:
             clear_console()
-            print(BR * 4)
+            print(BR * 8)
             print(C(f'{user_input.upper()} is not a valid input. Returning to login.'))
             time.sleep(2)
             login()
@@ -194,6 +194,8 @@ def check_fruits(user_num):
 
 def menu():
     clear_console()
+    print(BR)
+    print(C('FRUIT HUNTER'))
     print(BR * 4)
     print(C('MENU'))
     print(BR)
@@ -269,6 +271,8 @@ def play():
     
     while lives > 0:
         guess = input(' ' * 25 + 'Guess the fruit or a letter: ').upper()
+        # if guess == '':
+        #     update_game_screen('Whoops! Look like you didnt submit anything. Try again.')
         if len(guess) == 1 and guess.isalpha():
             if guess in guessed:
                 update_game_screen(f"You've already guessed {guess}. Please try again.")
@@ -287,11 +291,11 @@ def play():
                         answer += ('_ ')
                 update_game_screen(f'Success! The letter {guess} is in the word. Try another.')
             else:
-                update_game_screen('Sorry that character is invalid. Please try again')
+                update_game_screen('Sorry that character is invalid. Please try again.')
         elif guess == '':
-            update_game_screen('Whoops! Look like you dont submit an answer. Try again.')
+            update_game_screen('Whoops! Looks like you didn\'t submit anything. Try again.')
         else:
-            if guess == fruit:
+            if guess.replace(" ", "") == fruit:
                 updated_fruits = f'{fruits_collected} {fruit.lower()}'
                 WKS.update_cell(user_num,3,updated_fruits)
                 check_fruits(user_num)
@@ -314,7 +318,7 @@ def play():
                 lives -= 1
                 lives_lost_counter()
                 update_game_screen(f'Sorry, {guess} is not the word. Try again.') 
-        if answer == fruit:
+        if '_' not in answer:
             updated_fruits = f'{fruits_collected} {fruit.lower()}'
             WKS.update_cell(user_num,3,updated_fruits)
             check_fruits(user_num)
@@ -339,7 +343,7 @@ def play():
         user_deaths = int(user_info[3])
         user_deaths += 1
         WKS.update_cell(user_num,4,user_deaths)
-        print(BR * 4)
+        print(BR * 8)
         print(C('Oh no! You\'ve lost all your lives!'))
         user_input = input(' ' * 12 + 'Press Y to play again or N to go back to the main menu: ')
         while True:
@@ -391,7 +395,7 @@ def rules():
     """
     clear_console()
     phrases = ['The aim of Fruit Hunter is to gather all the fruit!',
-    'Fruit is gathered by trying to guess which name of the fruit is being displayed',
+    'Fruit is gathered by guessing the name of the fruit being displayed',
     'You can guess one letter at a time or try and guess the whole word',
     'The player has five lives. Incorrect guesses will lose you 1 life',
     'If all lives are lost you lose the game',
@@ -424,11 +428,10 @@ def fruit_li():
     print(C('Fruits Collected'))
     print(BR)
     
-    if len(fruits_coll_li) == len(fruits): # Greater sign used here instead of equals because the list will always start with an empty string which the game reads as one entry.
+    if len(fruits_coll_li) == len(fruits):
         print(C('Well done!')) 
         print(C('You have collected all the fruits and been entered into the hall of fame!'))
         for x in fruits_coll_li:
-            
             if y < 6:
                 top_li.append(x.capitalize())
                 y += 1
@@ -469,29 +472,24 @@ def fruit_li():
         else:
             fruit_li()
     else:
-        # The length of fruits_coll_li has to have one subtracted to account for the empty string that is input when the list is created.
         print(C(f'There are {len(fruits)} fruits to collect. You have found {(len(fruits_coll_li))}! '))
         print(C('You have already found:'))
-        if len(fruits_coll_li) < 6:
-            print(C(fruits_collected.upper()))
-        else:
-            for x in fruits_coll_li:
-                
-                if y < 6:
-                    top_li.append(x.capitalize())
-                    y += 1
-                elif 5 < y < 11:
-                    mid_li.append(x.capitalize())
-                    y += 1
-                else:
-                    bot_li.append(x.capitalize())
-                    y += 1
-            print(C(', '.join(top_li)))
-            print(C(', '.join(mid_li)))
-            print(C(', '.join(bot_li)))
+        for x in fruits_coll_li:
+            if y < 6:
+                top_li.append(x.capitalize())
+                y += 1
+            elif 5 < y < 11:
+                mid_li.append(x.capitalize())
+                y += 1
+            else:
+                bot_li.append(x.capitalize())
+                y += 1
+        print(C(', '.join(top_li)))
+        print(C(', '.join(mid_li)))
+        print(C(', '.join(bot_li)))
         print(BR)
-        user_input = input(' ' * 22 + 'Enter Y to return to the main menu: ')
-        if user_input.upper() == 'Y':
+        user_input = input(' ' * 21 + 'Press Enter to return to the main menu: ')
+        if user_input.upper() == '':
             menu()
         else:
             fruit_li()
@@ -526,11 +524,11 @@ def display_hof():
     print(BR)
     index = 1
     for x in all:
-        print(' ' * 21 + str(index) + ': ', str(x[0].capitalize()) + '  -  Lives Lost: ' + str(x[1]) + '  -  Deaths: ' + str(x[2]))
+        print(' ' * 18 + str(index) + ': ', str(x[0].capitalize()) + '  -  Lives Lost: ' + str(x[1]) + '  -  Deaths: ' + str(x[2]))
         index += 1
     print(BR)
-    user_input = input(' ' * 22 + 'Enter Y to return to the main menu: ')
-    if user_input.upper() == 'Y':
+    user_input = input(' ' * 21 + 'Press Enter to return to the main menu: ')
+    if user_input.upper() == '':
         menu()
     else:
         display_hof()
