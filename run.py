@@ -175,7 +175,7 @@ def check_fruits(user_num):
     Checks what fruit the user has already collected if any and removes them from the fruits to find list.
     """
     global fruits 
-    fruits = ['apple', 'banana', 'pear']
+    fruits = ['apple', 'banana', 'pear', 'orange', 'lemon', 'cherry', 'strawberry', 'melon', 'kiwi', 'pineapple', 'peach', 'lime', 'blueberry', 'grape', 'plum']
     user_info = WKS.row_values(user_num)
     global fruits_collected
     fruits_collected = user_info[2]
@@ -484,7 +484,7 @@ def display_hof():
     print(BR)
     index = 1
     for x in all:
-        print(' ' * 16 + str(index) + ': ', str(x[0].capitalize()) + '  -  Lives Lost: ' + str(x[1]) + '  -  Deaths: ' + str(x[2]))
+        print(' ' * 21 + str(index) + ': ', str(x[0].capitalize()) + '  -  Lives Lost: ' + str(x[1]) + '  -  Deaths: ' + str(x[2]))
         index += 1
     print(BR)
     user_input = input(' ' * 22 + 'Enter Y to return to the main menu: ')
