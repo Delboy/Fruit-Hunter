@@ -394,7 +394,7 @@ def rules():
     'The player has five lives. Incorrect guesses will lose you 1 life',
     'If all lives are lost you lose the game',
     "But dont worry as any fruit you've already found are saved!",
-    'If you discover all the fruit you win the game and get entered into the hall of fame!',
+    'Find all the fruit you win the game and get entered into the hall of fame!',
     'Happy hunting!']
     for x in phrases:
         clear_console()
@@ -412,15 +412,34 @@ def fruit_li():
     Enables the user to reset the list if all fruits have been found.
     """
     check_fruits(user_num)
+    fruits_coll_li.remove('')
+    top_li = []
+    mid_li = []
+    bot_li = []
+    y = 1
     clear_console()
     print(BR * 4)
     print(C('Fruits Collected'))
     print(BR)
     
-    if len(fruits_coll_li) > len(fruits): # Greater sign used here instead of equals because the list will always start with an empty string which the game reads as one entry.
+    if len(fruits_coll_li) == len(fruits): # Greater sign used here instead of equals because the list will always start with an empty string which the game reads as one entry.
         print(C('Well done!')) 
         print(C('You have collected all the fruits and been entered into the hall of fame!'))
-        print(C(fruits_collected.upper()))
+        for x in fruits_coll_li:
+            
+            if y < 6:
+                top_li.append(x.capitalize())
+                y += 1
+            elif 5 < y < 11:
+                mid_li.append(x.capitalize())
+                y += 1
+            else:
+                bot_li.append(x.capitalize())
+                y += 1
+        print(C(', '.join(top_li)))
+        print(C(', '.join(mid_li)))
+        print(C(', '.join(bot_li)))
+        print(BR)
         user_input = input(' ' * 20 + 'Would you like to reset the list? Y/N: ')
         if user_input.upper() == 'Y':
             fruits_left = fruits
@@ -442,16 +461,32 @@ def fruit_li():
             menu()
     elif fruits_collected == '':
         print(C("Sorry, you havn't collected any fruits yet!"))
-        user_input = input(' ' * 22 + 'Enter Y to return to the main menu: ')
-        if user_input.upper() == 'Y':
+        user_input = input(' ' * 20 + 'Press Enter to return to the main menu: ')
+        if user_input == '':
             menu()
         else:
             fruit_li()
     else:
-        # The lengthe of fruits_coll_li has to have one subtracted to account for the empty string that is input when the list is created.
-        print(C(f'There are {len(fruits)} fruits to collect. You have found {(len(fruits_coll_li) - 1)}! '))
+        # The length of fruits_coll_li has to have one subtracted to account for the empty string that is input when the list is created.
+        print(C(f'There are {len(fruits)} fruits to collect. You have found {(len(fruits_coll_li))}! '))
         print(C('You have already found:'))
-        print(C(fruits_collected.upper()))
+        if len(fruits_coll_li) < 6:
+            print(C(fruits_collected.upper()))
+        else:
+            for x in fruits_coll_li:
+                
+                if y < 6:
+                    top_li.append(x.capitalize())
+                    y += 1
+                elif 5 < y < 11:
+                    mid_li.append(x.capitalize())
+                    y += 1
+                else:
+                    bot_li.append(x.capitalize())
+                    y += 1
+            print(C(', '.join(top_li)))
+            print(C(', '.join(mid_li)))
+            print(C(', '.join(bot_li)))
         print(BR)
         user_input = input(' ' * 22 + 'Enter Y to return to the main menu: ')
         if user_input.upper() == 'Y':
