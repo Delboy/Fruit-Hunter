@@ -108,7 +108,7 @@ def create_user():
             print(C('Sorry, the pins do not match. Please try again.'))
             user_pin = input(' ' * 34 + 'Input PIN: ')
             clear_console()
-            print(BR * 6)
+            print(BR * 8)
             verify_pin = input(' ' * 34 +'Verify PIN: ')
         new_user = [user_name.lower(), user_pin,'',0, 0]   
         WKS.append_row(new_user)
@@ -196,7 +196,7 @@ def menu():
     clear_console()
     print(BR)
     print(C('FRUIT HUNTER'))
-    print(BR * 4)
+    print(BR * 3)
     print(C('MENU'))
     print(BR)
     print(C('1. Play'))
@@ -230,7 +230,7 @@ def play():
     check_fruits(user_num)
     if len(fruits_coll_li) > len(fruits):
         clear_console()
-        print(BR * 4)
+        print(BR * 8)
         print(C('Oh no! It looks like you\'ve already collected all the fruit!'))
         print(C('Check to see if you\'ve reached the hall of fame!'))
         print(C('Would you like to reset the list and play again?'))
@@ -295,7 +295,7 @@ def play():
         elif guess == '':
             update_game_screen('Whoops! Looks like you didn\'t submit anything. Try again.')
         else:
-            if guess.replace(" ", "") == fruit:
+            if guess == fruit:
                 updated_fruits = f'{fruits_collected} {fruit.lower()}'
                 WKS.update_cell(user_num,3,updated_fruits)
                 check_fruits(user_num)
@@ -311,8 +311,9 @@ def play():
                         menu()
                     else:
                         clear_console()
-                        print(BR * 4)
-                        print(C('Sorry, that character is not recognised. Please hit ENTER to play again or N to return to the main menu.'))
+                        print(BR * 8)
+                        print(C('Sorry, character not recognised.')) 
+                        print(C('Please hit ENTER to play again or N to return to the main menu.'))
                         user_input = input(' ' * 39 + ': ')
             else:
                 lives -= 1
@@ -452,7 +453,7 @@ def fruit_li():
             WKS.update_cell(user_num,4,0)
             WKS.update_cell(user_num,5,0)
             clear_console()
-            print(4 * BR)
+            print(8 * BR)
             print(C('List has been reset. Returning to main menu.'))
             time.sleep(2)
             menu()
