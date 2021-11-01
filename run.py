@@ -64,14 +64,14 @@ def create_user():
     clear_console()
     print(BR * 8)
     # Creates username
-    user_name = input(' ' * 27 + 'Please choose a username: ')
-    while (len(user_name) > 15) or (user_name in users) or (user_name == ''):
+    user_name = input(' ' * 14 + 'Please choose a username or type LOGIN to sign in: ')
+    while (len(user_name) > 15) or (user_name.lower() in users) or (user_name == '') or (user_name.upper() == 'LOGIN'):
         if len(user_name) > 15:
             clear_console()
             print(BR * 8)
             print(C('Sorry, that name is too long. Please keep under 15 characters.'))
             user_name = input(' ' * 27 + 'Please choose a username: ')
-        if user_name in users:
+        if user_name.lower() in users:
             clear_console()
             print(BR * 8)
             print(C('Sorry, that name is taken. Please try again'))
@@ -81,6 +81,8 @@ def create_user():
             print(BR * 8)
             print(C('Sorry, tha name cannot be blank. Please try again'))
             user_name = input(' ' * 27 + 'Please choose a username: ')
+        if user_name.upper() == 'LOGIN':
+            login()
     clear_console()
     print(BR * 8)
     print(C(f'You chose the username {user_name.capitalize()}. Is this correct?'))
