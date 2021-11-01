@@ -1,7 +1,6 @@
 import gspread
 from google.oauth2.service_account import Credentials
 import os
-import sys
 import time
 import random
 
@@ -49,12 +48,10 @@ def welcome():
     elif user_choice.upper() == 'N':
         clear_console()
         create_user()
-    elif user_choice.upper() == 'X':
-        sys.exit()
     else:
         clear_console()
         print(BR * 4)
-        print(C('You must choose either Y or N or type X to exit.'))
+        print(C('You must choose either Y or N.'))
         time.sleep(3)
         welcome()
 
@@ -124,7 +121,6 @@ def create_user():
         print(C('Success! User created! Your log in details are:')) 
         print(C(f'User Name: {user_name.capitalize()}'))
         print(C(f'PIN: {user_pin}'))
-        print(C('Directing you to log-in...'))
         time.sleep(3)
         users = WKS.col_values(1)
         global user_num
@@ -223,7 +219,7 @@ def menu():
     elif user_input == '4':
         display_hof()
     elif user_input == '5':
-        sys.exit()
+        welcome()
     else:
         clear_console()
         print(BR * 4)
@@ -279,7 +275,7 @@ def play():
     print(C(BR))
     
     while lives > 0:
-        guess = input(' ' * 25 + 'Guess the fruit or a letter: ').upper()
+        guess = input(' ' * 15 + 'Guess the fruit or a letter or type EXIT to leave: ').upper()
         # if guess == '':
         #     update_game_screen('Whoops! Look like you didnt submit anything. Try again.')
         if len(guess) == 1 and guess.isalpha():
@@ -324,6 +320,8 @@ def play():
                         print(C('Sorry, character not recognised.')) 
                         print(C('Please hit ENTER to play again or N to return to the main menu.'))
                         user_input = input(' ' * 39 + ': ')
+            elif guess.upper() == 'EXIT':
+                menu()
             else:
                 lives -= 1
                 lives_lost_counter()
