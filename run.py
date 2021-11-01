@@ -125,8 +125,11 @@ def create_user():
         print(C(f'User Name: {user_name.capitalize()}'))
         print(C(f'PIN: {user_pin}'))
         print(C('Directing you to log-in...'))
-        time.sleep(3)  
-        login()
+        time.sleep(3)
+        users = WKS.col_values(1)
+        global user_num
+        user_num = users.index(user_name) + 1             
+        menu()
     else:
         create_user()
 
@@ -144,8 +147,9 @@ def login():
         clear_console()
         print(BR *8)
         pin_input = input(' ' * 29 + 'Please enter PIN: ')
-        row_number = users.index(user_name) + 1
-        users_info = WKS.row_values(row_number)
+        global user_num
+        user_num = users.index(user_name) + 1
+        users_info = WKS.row_values(user_num)
         users_pin = users_info[1]
         clear_console()
         if pin_input == users_pin:
@@ -153,8 +157,6 @@ def login():
             print(BR * 8)
             print(C('Login successfull'))
             time.sleep(2)
-            global user_num
-            user_num = row_number
             menu()
         else:
             clear_console()
