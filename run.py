@@ -345,7 +345,8 @@ def play():
                 else:
                     clear_console()
                     print(BR * 4)
-                    print(C('Sorry, that character is not recognised. Please hit ENTER to play again or N to return to the main menu.'))
+                    print(C('Sorry, that character is not recognised.')) 
+                    print(C('Please hit ENTER to play again or N to return to the main menu.'))
                     user_input = input(' ' * 39 + ': ')
     if lives == 0:
         clear_console()
@@ -364,7 +365,8 @@ def play():
             else:
                 clear_console()
                 print(BR * 4)
-                print(C('Sorry, that character is not recognised. Please input Y to play again or N to return to the main menu.'))
+                print(C('Sorry, that character is not recognised.')) 
+                print(C('Please input Y to play again or N to return to the main menu.'))
                 user_input = input(' ' * 39 + ': ')
 
 def update_game_screen(msg):
