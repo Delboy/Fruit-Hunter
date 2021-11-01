@@ -97,7 +97,8 @@ def create_user():
         while (user_pin.isdecimal() == False) or (len(user_pin) != 4):
             clear_console()
             print(BR * 8)
-            print(C('Sorry, the PIN must be four digits long and only consist of numbers. Please try again.'))
+            print(C('Sorry, the PIN must be four digits long and only consist of numbers.'))
+            print(C('Please try again.'))
             user_pin = input(' ' * 37 + 'PIN: ')
         clear_console()
         print(BR * 8)
@@ -107,6 +108,12 @@ def create_user():
             print(BR * 8)
             print(C('Sorry, the pins do not match. Please try again.'))
             user_pin = input(' ' * 34 + 'Input PIN: ')
+            while (user_pin.isdecimal() == False) or (len(user_pin) != 4):
+                clear_console()
+                print(BR * 8)
+                print(C('Sorry, the PIN must be four digits long and only consist of numbers.'))
+                print(C('Please try again.'))
+                user_pin = input(' ' * 37 + 'PIN: ')
             clear_console()
             print(BR * 8)
             verify_pin = input(' ' * 34 +'Verify PIN: ')
