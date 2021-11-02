@@ -65,7 +65,8 @@ def create_user():
         ' ' * 14 + 'Please choose a username or type LOGIN to sign in: '
         )
     while (len(user_name) > 15) or (user_name.lower() in users) or \
-            (user_name == '') or (user_name.upper() == 'LOGIN'):
+            (user_name == '') or (user_name.isalpha() is False) or \
+            (user_name.upper() == 'LOGIN'):
         if len(user_name) > 15:
             clear_console()
             print(BR * 8)
@@ -77,12 +78,17 @@ def create_user():
         if user_name.lower() in users:
             clear_console()
             print(BR * 8)
-            print(C('Sorry, that name is taken. Please try again'))
+            print(C('Sorry, that name is taken. Please try again.'))
             user_name = input(' ' * 27 + 'Please choose a username: ')
         if user_name == '':
             clear_console()
             print(BR * 8)
-            print(C('Sorry, tha name cannot be blank. Please try again'))
+            print(C('Sorry, tha name cannot be blank. Please try again.'))
+            user_name = input(' ' * 27 + 'Please choose a username: ')
+        if user_name.isalpha() is False:
+            clear_console()
+            print(BR * 8)
+            print(C('Sorry, no special characters allowed. Please try again.'))
             user_name = input(' ' * 27 + 'Please choose a username: ')
         if user_name.upper() == 'LOGIN':
             login()
@@ -286,7 +292,6 @@ def play():
             time.sleep(2)
             menu()
 
-    check_fruits(user_num)
     clear_console()
     user_info = WKS.row_values(user_num)
     fruit = random_fruit()
@@ -305,8 +310,10 @@ def play():
         guess = input(
             ' ' * 15 + 'Guess the fruit or a letter or type EXIT to leave: '
             ).upper()
-        if len(guess) == 1 and guess.isalpha():
-            if guess in guessed:
+        if len(guess) == 1:
+            if guess.isalpha() is False:
+                update_game_screen('Sorry, no special characters allowed.')
+            elif guess in guessed:
                 update_game_screen(
                     f"You've already guessed {guess}. Please try again."
                     )
@@ -336,43 +343,44 @@ def play():
             update_game_screen(
                 'Whoops! Looks like you didn\'t submit anything. Try again.'
                 )
+        elif guess.isalpha() is False:
+            update_game_screen('Sorry, no special characters allowed.')
+        elif guess == fruit:
+            updated_fruits = f'{fruits_collected} {fruit.lower()}'
+            WKS.update_cell(user_num, 3, updated_fruits)
+            check_fruits(user_num)
+            answer = fruit
+            if len(fruits_coll_li) == len(fruits):
+                add_to_hof(user_num)
+            update_game_screen(
+                f'Success! You found a {fruit}. '
+                'It has been added to your basket.'
+                )
+            user_input = input(
+                ' ' * 7 + 'Press ENTER to play again '
+                'or type N to go back to the main menu: '
+                )
+            while True:
+                if user_input == '':
+                    play()
+                elif user_input.upper() == 'N':
+                    menu()
+                else:
+                    clear_console()
+                    print(BR * 8)
+                    print(C('Sorry, character not recognised.'))
+                    print(C(
+                        'Please hit ENTER to play again '
+                        'or N to return to the main menu.'
+                        ))
+                    user_input = input(' ' * 39 + ': ')
+        elif guess.upper() == 'EXIT':
+            menu()
         else:
-            if guess == fruit:
-                updated_fruits = f'{fruits_collected} {fruit.lower()}'
-                WKS.update_cell(user_num, 3, updated_fruits)
-                check_fruits(user_num)
-                answer = fruit
-                if len(fruits_coll_li) == len(fruits):
-                    add_to_hof(user_num)
-                update_game_screen(
-                    f'Success! You found a {fruit}. '
-                    'It has been added to your basket.'
-                    )
-                user_input = input(
-                    ' ' * 7 + 'Press ENTER to play again '
-                    'or type N to go back to the main menu: '
-                    )
-                while True:
-                    if user_input == '':
-                        play()
-                    elif user_input.upper() == 'N':
-                        menu()
-                    else:
-                        clear_console()
-                        print(BR * 8)
-                        print(C('Sorry, character not recognised.'))
-                        print(C(
-                            'Please hit ENTER to play again '
-                            'or N to return to the main menu.'
-                            ))
-                        user_input = input(' ' * 39 + ': ')
-            elif guess.upper() == 'EXIT':
-                menu()
-            else:
-                lives -= 1
-                lives_lost_counter()
-                update_game_screen(
-                    f'Sorry, {guess} is not the word. Try again.'
+            lives -= 1
+            lives_lost_counter()
+            update_game_screen(
+                f'Sorry, {guess} is not the word. Try again.'
                     )
         if '_' not in answer:
             updated_fruits = f'{fruits_collected} {fruit.lower()}'
