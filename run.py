@@ -605,8 +605,9 @@ def display_hof():
     clear_console()
     all = HOF.get_all_values()
     all.pop(0)
-    # This line is credited to  https://www.geeksforgeeks.org
-    all.sort(key=lambda all: all[1])
+    # This line is credited to
+    # https://www.geeksforgeeks.org/python-sort-list-according-second-element-sublist/
+    all.sort(key=lambda all: all[1], reverse=True)
     x = slice(5)
     all = all[x]
     if len(all) < 5:
