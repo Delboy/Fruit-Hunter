@@ -506,7 +506,8 @@ def rules():
         print(C('HOW TO PLAY'))
         print(BR)
         print((C(x)))
-        time.sleep(4)
+        print(BR * 4)
+        input(' ' * 30 + 'Hit enter to proceed ')
     menu()
 
 
