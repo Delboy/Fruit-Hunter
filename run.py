@@ -26,6 +26,8 @@ def clear_console():
     """
     Clears the console.
     """
+    # This line is credited to 
+    # https://stackoverflow.com/questions/2084508/clear-terminal-in-python
     os.system('cls' if os.name == 'nt' else 'clear')
 
 
@@ -36,7 +38,7 @@ def welcome():
     """
     clear_console()
     print(BR * 4)
-    print('{:^80}'.format('Welcome to FRUIT HUNTER!'))
+    print(C('Welcome to FRUIT HUNTER!'))
     print(BR * 4)
     user_choice = input(' ' * 25 + 'Have you played before? Y/N: ')
     if user_choice.upper() == 'Y':
@@ -83,12 +85,12 @@ def create_user():
         if user_name == '':
             clear_console()
             print(BR * 8)
-            print(C('Sorry, tha name cannot be blank. Please try again.'))
+            print(C('Sorry, the name cannot be blank. Please try again.'))
             user_name = input(' ' * 27 + 'Please choose a username: ')
         if user_name.isalpha() is False:
             clear_console()
             print(BR * 8)
-            print(C('Sorry, no special characters allowed. Please try again.'))
+            print(C('Sorry, only letters are allowed. Please try again.'))
             user_name = input(' ' * 27 + 'Please choose a username: ')
         if user_name.upper() == 'LOGIN':
             login()
@@ -158,9 +160,11 @@ def login():
     print(BR * 8)
     print(C('Please log in'))
     user_name = input(' ' * 32 + 'User Name: ').lower()
+    # Checks if user name exists.
     if user_name in users:
         clear_console()
         print(BR * 8)
+        # Checks if users pin matches.
         pin_input = input(' ' * 29 + 'Please enter PIN: ')
         global user_num
         user_num = users.index(user_name) + 1
@@ -170,7 +174,7 @@ def login():
         if pin_input == users_pin:
             clear_console()
             print(BR * 8)
-            print(C('Login successfull'))
+            print(C('Login successful'))
             time.sleep(2)
             menu()
         else:
@@ -182,9 +186,9 @@ def login():
     else:
         clear_console()
         print(BR * 8)
+        print(C('That username does not exist.'))
         user_input = input(
-            ' ' * 4 + 'That username does not exist. '
-            'Would you like to create a user login? Y/N: '
+            ' ' * 18 + 'Would you like to create a user login? Y/N: '
             )
         if user_input.upper() == 'Y':
             create_user()
@@ -204,7 +208,7 @@ def login():
 def check_fruits(user_num):
     """
     Checks what fruit the user has already collected if any
-    and removes them from the fruits to find list.
+    and removes them from the fruits-to-find list.
     """
     global fruits
     fruits = [
@@ -217,17 +221,17 @@ def check_fruits(user_num):
     fruits_collected = user_info[2]
     global fruits_coll_li
     fruits_coll_li = list(fruits_collected.split(" "))
-    if fruits_coll_li[0] == ' ':
-        fruits_coll_li = []
-    new_list = []
+    global fruits_left
+    fruits_left = []
     for fruit in fruits:
         if fruit not in fruits_coll_li:
-            new_list.append(fruit)
-    global fruits_left
-    fruits_left = new_list
+            fruits_left.append(fruit)
 
 
 def menu():
+    """
+    Displays the main menu.
+    """
     clear_console()
     print(BR)
     print(C('FRUIT HUNTER'))
@@ -263,6 +267,8 @@ def play():
     Plays the game.
     """
     check_fruits(user_num)
+    # Checks if the user has already collected all the fruit.
+    # Enables user to reset list if all fruit found.
     if len(fruits_coll_li) > len(fruits):
         clear_console()
         print(BR * 8)
@@ -310,9 +316,10 @@ def play():
         guess = input(
             ' ' * 15 + 'Guess the fruit or a letter or type EXIT to leave: '
             ).upper()
+        # Runs if users guess is one letter.
         if len(guess) == 1:
             if guess.isalpha() is False:
-                update_game_screen('Sorry, no special characters allowed.')
+                update_game_screen('Sorry, only letters are allowed.')
             elif guess in guessed:
                 update_game_screen(
                     f"You've already guessed {guess}. Please try again."
@@ -344,12 +351,14 @@ def play():
                 'Whoops! Looks like you didn\'t submit anything. Try again.'
                 )
         elif guess.isalpha() is False:
-            update_game_screen('Sorry, no special characters allowed.')
+            update_game_screen('Sorry, only letters are allowed.')
+        # Runs if guess is longer then 1 character.
         elif guess == fruit:
             updated_fruits = f'{fruits_collected} {fruit.lower()}'
             WKS.update_cell(user_num, 3, updated_fruits)
             check_fruits(user_num)
             answer = fruit
+            # Adds user to hall of fame if all fruits found.
             if len(fruits_coll_li) == len(fruits):
                 add_to_hof(user_num)
             update_game_screen(
@@ -382,10 +391,12 @@ def play():
             update_game_screen(
                 f'Sorry, {guess} is not the word. Try again.'
                     )
+        # Runs if each individual character has been found.
         if '_' not in answer:
             updated_fruits = f'{fruits_collected} {fruit.lower()}'
             WKS.update_cell(user_num, 3, updated_fruits)
             check_fruits(user_num)
+            # Adds user to hall of fame if all fruits found.
             if len(fruits_coll_li) == len(fruits):
                 add_to_hof(user_num)
                 clear_console()
@@ -411,11 +422,12 @@ def play():
                         'or N to return to the main menu.'
                         ))
                     user_input = input(' ' * 39 + ': ')
+    # Runs if user loses all lives.
     if lives == 0:
         clear_console()
         user_deaths = int(user_info[3])
         user_deaths += 1
-        # Updates times user has died on googlesheet.
+        # Updates times user has died on google sheets.
         WKS.update_cell(user_num, 4, user_deaths)
         print(BR * 8)
         print(C('Oh no! You\'ve lost all your lives!'))
@@ -451,7 +463,6 @@ def update_game_screen(msg):
     print(C(answer))
     print(BR)
     print(C(msg))
-    # print(BR)
 
 
 def random_fruit():
@@ -464,7 +475,7 @@ def random_fruit():
 
 def lives_lost_counter():
     """
-    Updates a counter on goolge sheets everytime the player loses a life.
+    Updates a counter on google sheets every time the player loses a life.
     """
     user_info = WKS.row_values(user_num)
     user_lives_lost = int(user_info[4])
@@ -484,6 +495,7 @@ def rules():
         'The player has five lives. Incorrect guesses will lose you 1 life',
         'If all lives are lost you lose the game',
         "But dont worry as any fruit you've already found are saved!",
+        'You can view the fruit you\'ve found in the fruits collected screen',
         'Find all the fruit you win the game '
         'and get entered into the hall of fame!',
         'Happy hunting!'
@@ -504,11 +516,24 @@ def fruit_li():
     Enables the user to reset the list if all fruits have been found.
     """
     check_fruits(user_num)
+    # Removes the empty entry at start of list from when user was created.
     fruits_coll_li.remove('')
+    # Sorts fruits collected to display 5 in each row.
     top_li = []
     mid_li = []
     bot_li = []
     y = 1
+    for x in fruits_coll_li:
+        if y < 6:
+            top_li.append(x.capitalize())
+            y += 1
+        elif 5 < y < 11:
+            mid_li.append(x.capitalize())
+            y += 1
+        else:
+            bot_li.append(x.capitalize())
+            y += 1
+
     clear_console()
     print(BR * 4)
     print(C('Fruits Collected'))
@@ -520,16 +545,6 @@ def fruit_li():
             'You have collected all the fruits '
             'and been entered into the hall of fame!'
             ))
-        for x in fruits_coll_li:
-            if y < 6:
-                top_li.append(x.capitalize())
-                y += 1
-            elif 5 < y < 11:
-                mid_li.append(x.capitalize())
-                y += 1
-            else:
-                bot_li.append(x.capitalize())
-                y += 1
         print(C(', '.join(top_li)))
         print(C(', '.join(mid_li)))
         print(C(', '.join(bot_li)))
@@ -557,7 +572,7 @@ def fruit_li():
             time.sleep(2)
             menu()
     elif fruits_collected == '':
-        print(C("Sorry, you havn't collected any fruits yet!"))
+        print(C("Sorry, you haven't collected any fruits yet!"))
         user_input = input(
             ' ' * 20 + 'Press Enter to return to the main menu: '
             )
@@ -571,16 +586,6 @@ def fruit_li():
             f'You have found {(len(fruits_coll_li))}! '
             ))
         print(C('You have already found:'))
-        for x in fruits_coll_li:
-            if y < 6:
-                top_li.append(x.capitalize())
-                y += 1
-            elif 5 < y < 11:
-                mid_li.append(x.capitalize())
-                y += 1
-            else:
-                bot_li.append(x.capitalize())
-                y += 1
         print(C(', '.join(top_li)))
         print(C(', '.join(mid_li)))
         print(C(', '.join(bot_li)))
