@@ -156,3 +156,30 @@ I have also asked friends and family and anybody with the code institute on slac
 
 - No bugs remaining.
 
+## Deployment
+
+This project was deployed using Code Instutute's mock terminal for Heroku.
+
+### Steps for deployment
+
+1. In your terminal type 'pip3 freeze > requirements.txt' then save and push the changes.
+2. Go to Heroku.com and sign in or create a free account.
+3. From the heroku dashboard click the 'Create new app' button.
+4. Name the app something unique and choose what region you are in then click 'Create app'.
+5. Go to the settings tab and find the Config Vars section. Click 'Reveal Config Vars'.
+6. If your project does not use a creds.json file then skip this step. Otherwise, in the field for KEY enter the value CREDS in all capitals. In the field for VALUE copy and past the entire contents of your creds.json file from your project. Then click 'Add'.
+7. In the field for KEY enter PORT in all capitals, then in the field for VALUE enter 8000. Then click 'Add'.
+8. Scroll down to the Buildpacks section and click 'Add buildpack'.
+9. Click Python then save changes.
+10. Add another buildpack by clicking 'Add buildpack' and this time click Nodejs then save changes.
+11. Make sure that Python appears above Nodejs in the buildpack section. If it does not you can click and drag them to change the order.
+12. Then head over to the deploy section by clicking deploy from the nav bar at the top of the page.
+13. From the 'Deployment method' section select GitHub and click 'Connect to GitHub'.
+14. Enter the repository name as it is in GitHub and click 'search'.
+15. Click the 'connect' button next to the repository to link it to heroku.
+16. To deploy scroll down and click the 'Deploy Branch' button.
+17. Heroku will notify you that the app was successfully deployed with a button to view the app.
+18. If you want to rebuild your app automatically you can also select the 'Enable Automatic Depolys' button which will then rebuild the app every time you push any changes.
+
+
+
