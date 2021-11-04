@@ -186,7 +186,7 @@ def login():
     else:
         clear_console()
         print(BR * 8)
-        print(C('That username does not exist.'))
+        print(C(f'The username {user_name.capitalize()} does not exist.'))
         user_input = input(
             ' ' * 18 + 'Would you like to create a user login? Y/N: '
             )
