@@ -123,4 +123,36 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 
 ![All fruit found](readme-assets/images/game_area_all_fruit.png)
 
+### Future Features
+
+- Enable user to spend a life for a hint, or multiple lives to solve a letter.
+- Different difficulty modes. Harder would entail less lives or if the player dies the fruits collected list is reset.
+
+## Testing
+
+I have tested this project by running the code through a validator at [Pep8online.com](http://pep8online.com/).
+
+I have also manually tested the game by trying to input invalid characters as well as trying to leave the input blank, or by inputting too many characters at any point where the user is asked for an input.
+
+I have also asked friends and family and anybody with the code institute on slack to try and find any bugs within the game.
+
+## Bugs
+
+### Solved Bugs
+
+- The length of the fruits collected list would always be one over. This is because when the user is created in the create_user function the cell containing the fruits collected could not be left blank, so you would have to input an empty string. This would then be read as an entry meaning the length of the list would always read that empty string as 1. Fixed this issue by removing the blank string with the line 'fruits_coll_li.remove('')'.
+
+- When creating the game I originally had no spaces between the underscores where the unsolved word was displayed. I found that this was hard for the user to distinguish how many letters were in the word, so I inserted a space in between each underscore. This introduced a bug where the game wouldn't end if you guessed each letter of the word individually. This was because in order for the game to recognise that you had guessed the word I had an if statement that read 'if answer == fruit', so that if anytime the answer that was being updated with each guess matched the fruit trying to be guessed then you would win. But because I now had put spaces in between the characters the answer would never match the fruit exactly. I solved this by changing what the game was looking for to determine a correct answer. I updated the if statement to see if there were no underscores left in the answer, as that would also mean every letter had been discovered. 
+
+- When creating a new user if the pins didn't match the user would be asked again for the pin. On this second go the user could create a pin any length with any characters. This happened because I had forgotten to insert the same while loop that checked the pins length and to make sure it was only numbers.
+
+- When creating a new user you could enter the same name as an exiting user if you capitalised the first letter. Fixed by using the .lower() method on the users input to check against the names on google sheets.
+
+- Originally I had the code to update the lives display inside the play function but found that it wouldnt update correctly. I ran print logs to check that the lives and lives lost counter was updating correctly which they were but it wasn't transferring over to the display. I couldn't figure out why but once I had created the update_game_screen function and implemented the lives display into it, it worked fine.
+
+- When creating the hall of fame function the game would crash if there weren't at least 5 names to be displayed. This was because the game is trying to retrieve information from google sheets that is not there. I fixed this by creating an if and a for loop. Which stated that if the length of all the information gathered was less then 5 (meaning there were less then 5 entries on google sheets), to append the list with blank information until there is 5 entries.
+
+### Unsolved Bugs
+
+- No bugs remaining.
 

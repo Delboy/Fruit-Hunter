@@ -26,7 +26,7 @@ def clear_console():
     """
     Clears the console.
     """
-    # This line is credited to 
+    # This line is credited to
     # https://stackoverflow.com/questions/2084508/clear-terminal-in-python
     os.system('cls' if os.name == 'nt' else 'clear')
 
