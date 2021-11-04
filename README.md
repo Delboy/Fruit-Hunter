@@ -60,7 +60,7 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 
 - If the user's name does not exist it will ask the user if they want to create a new login.
 
-![ogin_no_username](readme-assets/images/login_no_username.png)
+![login_no_username](readme-assets/images/login_no_username.png)
 
 - If the user's pin is incorrect it will notify the user and restart the login.
 
@@ -77,7 +77,7 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 
 ### How to play page
 
-- The how to play page shows the user the rules of the game. Each sentence displays for 3 seconds before changing to the next.
+- The how to play page shows the user the rules of the game. Hitting enter cycles through each point.
 
 ![How to play](readme-assets/images/how_to_play.gif)
 
