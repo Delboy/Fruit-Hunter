@@ -157,6 +157,8 @@ I also checked that the google worksheets were updating correctly when a users l
 
 - When creating the hall of fame function the game would crash if there weren't at least 5 names to be displayed. This was because the game is trying to retrieve information from google sheets that is not there. I fixed this by creating an if and a for loop. Which stated that if the length of all the information gathered was less than 5 (meaning there were less then 5 entries on google sheets), to append the list with blank information until there are 5 entries.
 
+- When guessing the word as a whole I noticed that the gaps between the letters would dissapear. So instead of displaying like this 'A P P L E' it would display like this 'APPLE'. It was a very subtle change but it bugged me. No pun intended. This was happening because I had the code 'answer = fruit' if you guessed the word right, so that the display would change to the word your trying to guess. I fixed this by inputing a simple 'for loop' that ran through the letters of the fruit, adding an extra space to each one, and then updating the answer.
+
 ### Unsolved Bugs
 
 - No bugs remaining.

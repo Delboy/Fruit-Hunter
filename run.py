@@ -357,7 +357,9 @@ def play():
             updated_fruits = f'{fruits_collected} {fruit.lower()}'
             WKS.update_cell(user_num, 3, updated_fruits)
             check_fruits(user_num)
-            answer = fruit
+            answer = ''
+            for x in fruit:
+                answer += str(x + ' ')
             # Adds user to hall of fame if all fruits found.
             if len(fruits_coll_li) == len(fruits):
                 add_to_hof(user_num)
