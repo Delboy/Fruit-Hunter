@@ -155,9 +155,9 @@ I also checked that the google worksheets were updating correctly when a users l
 
 - Originally I had the code to update the lives display inside the play function but found that it wouldnt update correctly. I ran print logs to check that the lives and lives lost counter was updating correctly which they were but it wasn't transferring over to the display. I couldn't figure out why but once I had created the update_game_screen function and implemented the lives display into it, it worked fine.
 
-- When creating the hall of fame function the game would crash if there weren't at least 5 names to be displayed. This was because the game is trying to retrieve information from google sheets that is not there. I fixed this by creating an if and a for loop. Which stated that if the length of all the information gathered was less than 5 (meaning there were less then 5 entries on google sheets), to append the list with blank information until there are 5 entries.
+- When creating the hall of fame function the game would crash if there weren't at least 5 names to be displayed. This was because the game is trying to retrieve information from google sheets that is not there. I fixed this by creating an if and a for loop. Which stated that if the length of all the information gathered was less than 5 (meaning there were less than 5 entries on google sheets), to append the list with blank information until there are 5 entries.
 
-- When guessing the word as a whole I noticed that the gaps between the letters would dissapear. So instead of displaying like this 'A P P L E' it would display like this 'APPLE'. It was a very subtle change but it bugged me. No pun intended. This was happening because I had the code 'answer = fruit' if you guessed the word right, so that the display would change to the word your trying to guess. I fixed this by inputing a simple 'for loop' that ran through the letters of the fruit, adding an extra space to each one, and then updating the answer.
+- When guessing the word as a whole I noticed that the gaps between the letters would dissapear. So instead of displaying like this 'A P P L E' it would display like this 'APPLE'. It was a very subtle change but it bugged me. No pun intended. This was happening because I had the code 'answer = fruit' if you guessed the word right, so that the display would change to the word you're trying to guess. I fixed this by inputting a simple 'for loop' that ran through the letters of the fruit, adding an extra space to each one, and then updating the answer.
 
 ### Unsolved Bugs
 
@@ -186,7 +186,7 @@ This project was deployed using Code Institute's mock terminal for Heroku and li
 14. The next page can be left blank so just click 'DONE'.
 15. Under 'Service Accounts' find the account you just created and click it.
 16. Navigate to the 'KEYS' tab and click 'ADD KEY', 'Create new key'. Select 'JSON' and click 'CREATE'.
-17. This will download a json file to your machine. This normally downloads into your 'downloads' folder but if your're unsure you can right click the file once it's downloaded and click 'show in folder' to locate it.
+17. This will download a json file to your machine. This normally downloads into your 'downloads' folder but if you're unsure you can right click the file once it's downloaded and click 'show in folder' to locate it.
 18. Next we will have to link the Google Sheets API. To do this navigate back to the library by clicking on the burger icon in the top left hand corner and selecting 'APIs and services', 'Library' from the dropdown menu.
 19. In the search bar search for 'Google Sheets' and select 'Google Sheets API' and click 'ENABLE'.
 20. Now, using a programme like Gitpod open or create a repository.
@@ -231,5 +231,9 @@ This project was deployed using Code Institute's mock terminal for Heroku and li
 17. Heroku will notify you that the app was successfully deployed with a button to view the app.
 18. If you want to rebuild your app automatically you can also select the 'Enable Automatic Deploys' button which will then rebuild the app every time you push any changes.
 
+## Credits
 
-
+The code linking the APIs is credited to [The Code Institute](codeinstitute.net) from their 'Love Sandwiches' project.
+The code to clear the console is credited to [Stackoverflow.com](https://stackoverflow.com/questions/2084508/clear-terminal-in-python).
+The code to sort a list of lists by its second entry is credited to [Geeksforgeeks.org](https://www.geeksforgeeks.org/python-sort-list-according-second-element-sublist/)
+Credit goes to daisygunn_5p at The Code Institute for helping me figure out how to update single cells in google sheets.
