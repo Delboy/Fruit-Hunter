@@ -30,6 +30,7 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 ### Create user page
 - The create user page prompts the user to create a log-in username and a 4 digit pin code.
 - If the user has made a mistake at the welcome screen and instead wants to log in they can type 'login' to be directed to the login page. 
+- Once verified the users chosen username and pin number is stored on a google sheet.
 
 ![choose_username](readme-assets/images/choose_username.png)
 ![choose_pin](readme-assets/images/choose_pin.png)
@@ -54,6 +55,7 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 
 ### Log in page
 - The log in page will ask the user for their log in name and pin code.
+- The users inputs will be used to match the information that was stored on a google sheet when the user created a login.
 
 ![login](readme-assets/images/login.png)
 ![login_pin](readme-assets/images/login_pin.png)
@@ -76,12 +78,12 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 ![Main Menu](readme-assets/images/main_menu.png)
 
 ### How to play page
-
 - The how to play page shows the user the rules of the game. Hitting enter cycles through each point.
 
 ![How to play](readme-assets/images/how_to_play.gif)
 
 ### Fruits collected page
+- Everytime the user collects a fruit when playing, the fruit will be added to their information in google sheets.
 - The fruits collected page will display a list of all the fruits the user has collected, if any, and informs the user how many more fruits they have yet to find.
 
 ![Fruits Collected](readme-assets/images/fruits_collected.png)
@@ -91,6 +93,7 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 ![All Fruits Collected](readme-assets/images/fruits_collected_all.png)
 
 ### Hall of Fame page
+- Once the user has collected all the fruit they are added to a google sheet which notes how many lives they lost and how many times they died.
 - The hall of fame page shows a list of the top 5 users that have collected all fruit.
 - The list will sort the users from least amount of lives lost to most.
 
@@ -130,11 +133,13 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 
 ## Testing
 
-I have tested this project by running the code through a validator at [Pep8online.com](http://pep8online.com/).
+I have tested this project by running the code through a validator at [Pep8online.com](http://pep8online.com/), which showed no faults.
 
 I have also manually tested the game by trying to input invalid characters as well as trying to leave the input blank, or by inputting too many characters at any point where the user is asked for an input.
 
-I have also asked friends and family and anybody with the code institute on slack to try and find any bugs within the game.
+I have also asked friends, family, and anybody with the code institute on slack to try and find any bugs within the game.
+
+I also checked that the google worksheets were updating correctly when a users login was created, and when a user was entered into the hall of fame which uses a separate worksheet.
 
 ## Bugs
 
@@ -144,13 +149,13 @@ I have also asked friends and family and anybody with the code institute on slac
 
 - When creating the game I originally had no spaces between the underscores where the unsolved word was displayed. I found that this was hard for the user to distinguish how many letters were in the word, so I inserted a space in between each underscore. This introduced a bug where the game wouldn't end if you guessed each letter of the word individually. This was because in order for the game to recognise that you had guessed the word I had an if statement that read 'if answer == fruit', so that if anytime the answer that was being updated with each guess matched the fruit trying to be guessed then you would win. But because I now had put spaces in between the characters the answer would never match the fruit exactly. I solved this by changing what the game was looking for to determine a correct answer. I updated the if statement to see if there were no underscores left in the answer, as that would also mean every letter had been discovered. 
 
-- When creating a new user if the pins didn't match the user would be asked again for the pin. On this second go the user could create a pin any length with any characters. This happened because I had forgotten to insert the same while loop that checked the pins length and to make sure it was only numbers.
+- When creating a new user if the pins didn't match the user would be asked again for the pin. On this second go the user could create a pin of any length with any characters. This happened because I had forgotten to insert the same while loop that checked the pins length and to make sure it was only numbers.
 
-- When creating a new user you could enter the same name as an exiting user if you capitalised the first letter. Fixed by using the .lower() method on the users input to check against the names on google sheets.
+- When creating a new user you could enter the same name as an existing user if you capitalise the first letter. Fixed by using the .lower() method on the users input to check against the names on google sheets.
 
 - Originally I had the code to update the lives display inside the play function but found that it wouldnt update correctly. I ran print logs to check that the lives and lives lost counter was updating correctly which they were but it wasn't transferring over to the display. I couldn't figure out why but once I had created the update_game_screen function and implemented the lives display into it, it worked fine.
 
-- When creating the hall of fame function the game would crash if there weren't at least 5 names to be displayed. This was because the game is trying to retrieve information from google sheets that is not there. I fixed this by creating an if and a for loop. Which stated that if the length of all the information gathered was less then 5 (meaning there were less then 5 entries on google sheets), to append the list with blank information until there is 5 entries.
+- When creating the hall of fame function the game would crash if there weren't at least 5 names to be displayed. This was because the game is trying to retrieve information from google sheets that is not there. I fixed this by creating an if and a for loop. Which stated that if the length of all the information gathered was less than 5 (meaning there were less then 5 entries on google sheets), to append the list with blank information until there are 5 entries.
 
 ### Unsolved Bugs
 
@@ -158,16 +163,59 @@ I have also asked friends and family and anybody with the code institute on slac
 
 ## Deployment
 
-This project was deployed using Code Instutute's mock terminal for Heroku.
+This project was deployed using Code Institute's mock terminal for Heroku and links to a Google Sheet API.
 
 ### Steps for deployment
 
-1. In your terminal type 'pip3 freeze > requirements.txt' then save and push the changes.
+## Setting up google sheets
+1. Head to https://console.cloud.google.com/ and sign in or create a free google account.
+2. From the google cloud platform dashboard click 'Select a new project'. Then select 'New project'.
+3. Create a name for your project under 'Project name' then click 'Create'.
+4. This should bring up a box with your project in. Underneath click 'SELECT PROJECT'.
+5. From the sidebar navigate to 'APIs and services', 'Library'.
+6. In the search bar search for google drive.
+7. Select 'Google drive API' and click 'ENABLE'.
+8. Click the 'CREATE CREDENTIALS' button located to the top right of the page.
+9. From the dropdown menu under 'Which API are you using?' select 'Google drive API'.
+10. Under 'What data will you be accessing' choose 'Application data'.
+11. Under 'Are you planning to use this API with Compute Engine, Kubernetes Engine, App Engine or Cloud Functions?' select 'No, i'm not using them' and click 'NEXT'.
+12. Enter a Service Account Name. You can name it whatever you like. I would suggest naming it the same as what you named your project. Then click 'CREATE AND CONTINUE'.
+13. In the 'Role' dropdown menu select 'Basic', 'Editor', then click 'Continue'.
+14. The next page can be left blank so just click 'DONE'.
+15. Under 'Service Accounts' find the account you just created and click it.
+16. Navigate to the 'KEYS' tab and click 'ADD KEY', 'Create new key'. Select 'JSON' and click 'CREATE'.
+17. This will download a json file to your machine. This normally downloads into your 'downloads' folder but if your're unsure you can right click the file once it's downloaded and click 'show in folder' to locate it.
+18. Next we will have to link the Google Sheets API. To do this navigate back to the library by clicking on the burger icon in the top left hand corner and selecting 'APIs and services', 'Library' from the dropdown menu.
+19. In the search bar search for 'Google Sheets' and select 'Google Sheets API' and click 'ENABLE'.
+20. Now, using a programme like Gitpod open or create a repository.
+21. Drag and drop the json file that you downloaded earlier into your workspace. Rename this file to 'creds.json'.
+22. Open the file and copy the email address under 'client_email' without the quotation marks.
+23. Open up the google sheet you want to use and click the 'Share' button.
+24. Paste in the client email. Make sure 'Editor' is selected, untick 'Notify people' and then click 'Share'.
+25. To protect sensitive information be sure to add your creds.json file to your gitignore file inside your editor.
+26. In order to use our google sheets API you need to install two additional dependencies into your project. To do this, inside your python workspace on the first line input 'import gspread' and on the line beneath input 'from google.oauth2.service_account import Credentials'.
+27. Underneath the two imports copy and paste this code, inserting the name of your google spreadsheet where it says 'google_sheet_name_here'.
+
+    SCOPE = [
+        "https://www.googleapis.com/auth/spreadsheets",
+        "https://www.googleapis.com/auth/drive.file",
+        "https://www.googleapis.com/auth/drive"
+        ]
+
+    CREDS = Credentials.from_service_account_file('creds.json')
+    SCOPED_CREDS = CREDS.with_scopes(SCOPE)
+    GSPREAD_CLIENT = gspread.authorize(SCOPED_CREDS)
+    SHEET = GSPREAD_CLIENT.open('google_sheet_name_here')
+
+28. Your APIs will now be linked to your project.
+
+## Setting up heroku
+1. If your requirements.txt file has not changed you can skip this step. Otherwise, in your terminal type 'pip3 freeze > requirements.txt' then save and push the changes.
 2. Go to Heroku.com and sign in or create a free account.
 3. From the heroku dashboard click the 'Create new app' button.
 4. Name the app something unique and choose what region you are in then click 'Create app'.
 5. Go to the settings tab and find the Config Vars section. Click 'Reveal Config Vars'.
-6. If your project does not use a creds.json file then skip this step. Otherwise, in the field for KEY enter the value CREDS in all capitals. In the field for VALUE copy and past the entire contents of your creds.json file from your project. Then click 'Add'.
+6. If your project does not use a creds.json file then skip this step. Otherwise, in the field for KEY enter the value CREDS in all capitals. In the field for VALUE copy and paste the entire contents of your creds.json file from your project. Then click 'Add'.
 7. In the field for KEY enter PORT in all capitals, then in the field for VALUE enter 8000. Then click 'Add'.
 8. Scroll down to the Buildpacks section and click 'Add buildpack'.
 9. Click Python then save changes.
@@ -177,9 +225,9 @@ This project was deployed using Code Instutute's mock terminal for Heroku.
 13. From the 'Deployment method' section select GitHub and click 'Connect to GitHub'.
 14. Enter the repository name as it is in GitHub and click 'search'.
 15. Click the 'connect' button next to the repository to link it to heroku.
-16. To deploy scroll down and click the 'Deploy Branch' button.
+16. To deploy, scroll down and click the 'Deploy Branch' button.
 17. Heroku will notify you that the app was successfully deployed with a button to view the app.
-18. If you want to rebuild your app automatically you can also select the 'Enable Automatic Depolys' button which will then rebuild the app every time you push any changes.
+18. If you want to rebuild your app automatically you can also select the 'Enable Automatic Deploys' button which will then rebuild the app every time you push any changes.
 
 
 
