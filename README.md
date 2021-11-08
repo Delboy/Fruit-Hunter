@@ -2,20 +2,41 @@
 
 Fruit hunter is a Python terminal game, which runs on a mock terminal on Heroku.
 
-User's try to find all the fruit by playing a hangman style game.
+User's try to find all the fruit by playing a hangman style game. There are 15 different fruits to find. Each time the user guesses a new fruit it is added to their collection. Once all fruits are collected the game is won and the users score is added to the hall of fame.
 
-## How to play
+## Contents 
 
-Fruit Hunter is based on the classic game hangman except every word to be guessed is a fruit. There are 15 different fruits to find. Each time the user guesses a new fruit it is added to their collection. Once all fruits are collected the game is won and the users score is added to the hall of fame.
+- [Design](#design)
+    * [The main menu flow chart](#main-menu-flow-chart)
+    * [The gameplay flow chart](#gameplay-flow-chart)
+- [Features](#features)
+    * [Welcome Page](#welcome-page)
+    * [Create user page](#create-user-page)
+    * [Log in page](#log-in-page)
+    * [Main Meny](#main-menu)
+    * [How to play page](#how-to-play-page)
+    * [Fruits collected page](#fruits-collected-page)
+    * [Hall of fame page](#hall-of-fame-page)
+    * [Game play](#game-play)
+    * [Future Features](#future-features)
+- [Testing](#testing)
+- [Bugs](#bugs)
+    * [Solved Bugs](#solved-bugs)
+    * [Unsolved Bugs](#unsolved-bugs)
+- [Deployment](#deployment)
+    * [Steps for deployment](#steps-for-deployment)
+        * [Setting up google sheets API](#setting-up-google-sheets-api)
+        * [Setting up Heroku](#setting-up-heroku)
+- [Credits](#credits)
 
 ## Design 
 
 I used [lucidchart.com](https://lucid.co/) to help design the project and create the following flow charts. 
 
-### The main menu flow chart :
+### Main menu flow chart :
 ![Main Flow Chart](readme-assets/images/main-flow.png)
 
-### The gameplay flow chart :
+### Gameplay flow chart :
 ![Gameplay Flow Chart](readme-assets/images/game-flow.png)
 
 ## Features
@@ -169,7 +190,8 @@ This project was deployed using Code Institute's mock terminal for Heroku and li
 
 ### Steps for deployment
 
-## Setting up google sheets
+#### Setting up google sheets API
+
 1. Head to https://console.cloud.google.com/ and sign in or create a free google account.
 2. From the google cloud platform dashboard click 'Select a new project'. Then select 'New project'.
 3. Create a name for your project under 'Project name' then click 'Create'.
@@ -211,7 +233,8 @@ This project was deployed using Code Institute's mock terminal for Heroku and li
 
 28. Your APIs will now be linked to your project.
 
-## Setting up heroku
+#### Setting up heroku
+
 1. If your requirements.txt file has not changed you can skip this step. Otherwise, in your terminal type 'pip3 freeze > requirements.txt' then save and push the changes.
 2. Go to Heroku.com and sign in or create a free account.
 3. From the heroku dashboard click the 'Create new app' button.
@@ -233,7 +256,7 @@ This project was deployed using Code Institute's mock terminal for Heroku and li
 
 ## Credits
 
-The code linking the APIs is credited to [The Code Institute](codeinstitute.net) from their 'Love Sandwiches' project.
-The code to clear the console is credited to [Stackoverflow.com](https://stackoverflow.com/questions/2084508/clear-terminal-in-python).
-The code to sort a list of lists by its second entry is credited to [Geeksforgeeks.org](https://www.geeksforgeeks.org/python-sort-list-according-second-element-sublist/)
-Credit goes to daisygunn_5p at The Code Institute for helping me figure out how to update single cells in google sheets.
+- The code linking the APIs is credited to [The Code Institute](codeinstitute.net) from their 'Love Sandwiches' project.
+- The code to clear the console is credited to [Stackoverflow.com](https://stackoverflow.com/questions/2084508/clear-terminal-in-python).
+- The code to sort a list of lists by its second entry is credited to [Geeksforgeeks.org](https://www.geeksforgeeks.org/python-sort-list-according-second-element-sublist/)
+- Credit goes to daisygunn_5p at The Code Institute for helping me figure out how to update single cells in google sheets.
