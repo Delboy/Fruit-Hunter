@@ -3,6 +3,8 @@ from google.oauth2.service_account import Credentials
 import os
 import time
 import random
+from colorama import Fore, init
+init(autoreset=True)
 
 # code taken from love-sandwiches project.
 
@@ -49,8 +51,8 @@ def welcome():
         create_user()
     else:
         clear_console()
-        print(BR * 4)
-        print(C('You must choose either Y or N.'))
+        print(BR * 8)
+        print(C(Fore.RED + 'You must choose either Y or N.'))
         time.sleep(3)
         welcome()
 
@@ -256,7 +258,7 @@ def menu():
         welcome()
     else:
         clear_console()
-        print(BR * 4)
+        print(BR * 8)
         print(C('Sorry that input has not been recognised. Please try again.'))
         time.sleep(2)
         menu()
@@ -555,25 +557,27 @@ def fruit_li():
         user_input = input(
             ' ' * 20 + 'Would you like to reset the list? Y/N: '
             )
-        if user_input.upper() == 'Y':
-            WKS.update_cell(user_num, 3, '')
-            WKS.update_cell(user_num, 4, 0)
-            WKS.update_cell(user_num, 5, 0)
-            clear_console()
-            print(8 * BR)
-            print(C('List has been reset. Returning to main menu.'))
-            time.sleep(2)
-            menu()
-        elif user_input.upper() == 'N':
-            print(C("You selected 'NO'. Returning to the main menu"))
-            time.sleep(2)
-            menu()
-        else:
-            print(C(
-                'That character was not recognised. '
-                'Returning to the main menu'))
-            time.sleep(2)
-            menu()
+        while True:
+            if user_input.upper() == 'Y':
+                WKS.update_cell(user_num, 3, '')
+                WKS.update_cell(user_num, 4, 0)
+                WKS.update_cell(user_num, 5, 0)
+                clear_console()
+                print(8 * BR)
+                print(C('List has been reset. Returning to main menu.'))
+                time.sleep(2)
+                menu()
+            elif user_input.upper() == 'N':
+                menu()
+            else:
+                clear_console()
+                print(BR * 8)
+                print(C('Sorry, that character is not recognised.'))
+                print(C(
+                    'Please input Y to clear the list '
+                    'or N to return to the menu.'
+                    ))
+                user_input = input(' ' * 39 + ': ')
     elif fruits_collected == '':
         print(C("Sorry, you haven't collected any fruits yet!"))
         user_input = input(
@@ -582,7 +586,7 @@ def fruit_li():
         if user_input == '':
             menu()
         else:
-            fruit_li()
+            menu()
     else:
         print(C(
             f'There are {len(fruits)} fruits to collect. '
@@ -599,7 +603,7 @@ def fruit_li():
         if user_input.upper() == '':
             menu()
         else:
-            fruit_li()
+            menu()
 
 
 def add_to_hof(user_num):
@@ -648,7 +652,7 @@ def display_hof():
     if user_input.upper() == '':
         menu()
     else:
-        display_hof()
+        menu()
 
 
 welcome()
