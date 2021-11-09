@@ -50,7 +50,7 @@ def welcome():
     else:
         clear_console()
         print(BR * 8)
-        print(C(Fore.RED + 'You must choose either Y or N.'))
+        print(C('You must choose either Y or N.'))
         time.sleep(3)
         welcome()
 
