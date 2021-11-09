@@ -9,9 +9,9 @@
     * [Login page](#login-page)
     * [Main Menu](#main-menu)
     * [Game play](#game-play)
-    * [How to play page](#how-to-play-page)
-    * [Fruits collected page](#fruits-collected-page)
-    * [Hall of fame page](#hall-of-fame-page)    
+    * [How to play](#how-to-play)
+    * [Fruits collected](#fruits-collected)
+    * [Hall of fame](#hall-of-fame)    
 - [Further Testing](#further-testing)
 - [Bugs](#bugs)
     * [Solved Bugs](#solved-bugs)
@@ -24,7 +24,7 @@ I have tested this project by running the code through a validator at [Pep8onlin
 ## User stories testing
 
 *As a user I want to be able to understand the rules of the game.*
-- From the main menu in the game users can access the 'How to play' screen which explains the rules of the game.
+- From the main menu users can access the 'How to play' screen which explains the rules of the game.
 
 *As a user I want the game to be intuitive.*
 - The user is guided through every step of the create user and login process with clear concise questions.
@@ -45,7 +45,7 @@ I have tested this project by running the code through a validator at [Pep8onlin
 ## Feature testing
 
 ### Welcome Page
-- Inputting anything other than Y or N prints informs the user 'You must choose Y or N'.
+- Inputting anything other than Y or N informs the user 'You must choose Y or N'.
 - If the user chooses 'Y' they are directed to the login page as intended.
 - If the user chooses 'N' they are directed to the create user page as intended.
 
@@ -61,7 +61,7 @@ I have tested this project by running the code through a validator at [Pep8onlin
 - If the verified PIN does not match the chosen PIN then the chosen PIN process is restarted.
 - Once the chosen PIN and verified PIN match the user is taken to the main menu as intended.
 - Entering a username as LOGIN (not case sensitive) will take the user to the login page as intended.
-- Users worksheet in google sheets is correctly updated with username and PIN when user is created.
+- The users worksheet in google sheets is correctly updated with username and PIN when user is created.
 
 ### Login Page
 - Entering any name that does not exist notifies the user that the name they've chosen does not exists and asks them whether they would like to create a user login.
@@ -91,6 +91,7 @@ I have tested this project by running the code through a validator at [Pep8onlin
 - Losing all lives will display a message informing the user that they have lost and gives them the option to play again or go back to the main menu.
 - When the user loses all lives and is asked if they want to play again or exit to the menu, any character other than 'Y' or 'N' informs the user that the character is not recognised and is asked again for an input.
 - If the user has collected all the fruit and tries to play a game they will be notified that they have already collected all fruit and if they wish to reset the fruits collected list to play again. If the user selects 'Y' the list will be reset and another game will begin. If the user chooses 'N' or any other character they will be returned to the menu.
+- Confirmed that no fruits appear twice.
 - Guessing a fruit updates the correct cell in the users worksheet in google sheets.
 - Losing a life updates the correct cell in the users worksheet in google sheets.
 - Losing all lives updates the correct cell in the users worksheet in google sheets.
@@ -98,11 +99,10 @@ I have tested this project by running the code through a validator at [Pep8onlin
 - ting the list wipes the correct cell in the user worksheet in google sheets.
 
 ### How to play
-- Hitting enter cycles through the rules of how to play and exits when finished as intended.
+- Hitting ENTER cycles through the rules of how to play and exits when finished as intended. Any typed inputs from the user are ignored.
 
 ### Fruits collected
-- The fruits collected page closes back to the menu as soon as the user hits ENTER as intended.
-- Hitting the ENTER key regardeless of any other inputs typed, will return the user to the main menu as intended.
+- The fruits collected page closes back to the menu as soon as the user hits ENTER as intended. Any typed inputs from the user are ignored.
 - The user is informed if they have 0 fruits collected. 
 - If the user has between 1 and 14 fruits the page will inform the user how many fruits they have found and will display each fruit collected. It will only display up to 5 fruits on each line.
 - If the user has collected all 15 fruits the page will congratulate the user and ask if they want the list to be reset. Choosing 'Y' notifies the user the list has been reset and takes them back to the menu. Choosing 'N' takes the user back to the main menu. Any other input informs the user that it is not recognised and asks the user for an input again.
