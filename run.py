@@ -1,9 +1,9 @@
 import gspread
 from google.oauth2.service_account import Credentials
-import os
-import time
+import os  # credit to stackoverflow.com
+import time  # credit to realpython.com
 import random
-from colorama import Fore, init
+from colorama import Fore, init  # credit to https://pypi.org/project/colorama/
 init(autoreset=True)
 
 # code taken from love-sandwiches project.

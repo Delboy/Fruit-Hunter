@@ -2,42 +2,59 @@
 
 Fruit hunter is a Python terminal game, which runs on a mock terminal on Heroku.
 
-User's try to find all the fruit by playing a hangman style game. There are 15 different fruits to find. Each time the user guesses a new fruit it is added to their collection. Once all fruits are collected the game is won and the users score is added to the hall of fame.
+User's try to find all the fruit by playing a hangman style game. There are 15 different fruits to find. Each time the user guesses a new fruit it is added to their collection. Once all fruits are collected the game is won and the user's score is added to the hall of fame.
 
 ## Contents 
 
+- [User Experience (UX)](#user-experience-ux)
+   * [User Goals](#user-goals)
+   * [Project Goals](#project-goals) 
+   * [User Stories](#user-stories)
 - [Design](#design)
-    * [The main menu flow chart](#main-menu-flow-chart)
-    * [The gameplay flow chart](#gameplay-flow-chart)
+    * [The main menu flowchart](#main-menu-flowchart)
+    * [The gameplay flowchart](#gameplay-flowchart)
 - [Features](#features)
     * [Welcome Page](#welcome-page)
     * [Create user page](#create-user-page)
-    * [Log in page](#log-in-page)
-    * [Main Meny](#main-menu)
+    * [Login page](#login-page)
+    * [Main Menu](#main-menu)
     * [How to play page](#how-to-play-page)
     * [Fruits collected page](#fruits-collected-page)
     * [Hall of fame page](#hall-of-fame-page)
     * [Game play](#game-play)
     * [Future Features](#future-features)
 - [Testing](#testing)
-- [Bugs](#bugs)
-    * [Solved Bugs](#solved-bugs)
-    * [Unsolved Bugs](#unsolved-bugs)
 - [Deployment](#deployment)
     * [Steps for deployment](#steps-for-deployment)
         * [Setting up google sheets API](#setting-up-google-sheets-api)
         * [Setting up Heroku](#setting-up-heroku)
 - [Credits](#credits)
 
+## User Experience (UX)
+
+### User Goals
+- As a user I want to have fun.
+- As a user I want the game to be challenging.
+
+### Project Goals
+- As the site owner I want the user to have a fun experience.
+- As the site owner I want the game to be functional with no bugs or errors.
+
+### User Stories
+- As a user I want to be able to understand the rules of the game.
+- As a user I want the game to be intuitive.
+- As a user I want feedback on my progress.
+- As a user I want to be able to save my progress.
+
 ## Design 
 
-I used [lucidchart.com](https://lucid.co/) to help design the project and create the following flow charts. 
+I used [lucidchart.com](https://lucid.co/) to help design the project and create the following flowcharts. 
 
-### Main menu flow chart :
-![Main Flow Chart](readme-assets/images/main-flow.png)
+### Main menu flowchart :
+![Main Flowchart](readme-assets/images/main-flow.png)
 
-### Gameplay flow chart :
-![Gameplay Flow Chart](readme-assets/images/game-flow.png)
+### Gameplay flowchart :
+![Gameplay Flowchart](readme-assets/images/game-flow.png)
 
 ## Features
 
@@ -50,8 +67,8 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 
 ### Create user page
 - The create user page prompts the user to create a log-in username and a 4 digit pin code.
-- If the user has made a mistake at the welcome screen and instead wants to log in they can type 'login' to be directed to the login page. 
-- Once verified the users chosen username and pin number is stored on a google sheet.
+- If the user has made a mistake at the welcome screen and instead wants to login they can type 'login' to be directed to the login page. 
+- Once verified the user's chosen username and pin number is stored on a google sheet.
 
 ![choose_username](readme-assets/images/choose_username.png)
 ![choose_pin](readme-assets/images/choose_pin.png)
@@ -74,9 +91,9 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 
 ![user_created](readme-assets/images/user_created.png)
 
-### Log in page
-- The log in page will ask the user for their log in name and pin code.
-- The users inputs will be used to match the information that was stored on a google sheet when the user created a login.
+### Login page
+- The login page will ask the user for their login name and pin code.
+- The user's inputs will be used to match the information that was stored on a google sheet when the user created a login.
 
 ![login](readme-assets/images/login.png)
 ![login_pin](readme-assets/images/login_pin.png)
@@ -116,7 +133,7 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 ### Hall of Fame page
 - Once the user has collected all the fruit they are added to a google sheet which notes how many lives they lost and how many times they died.
 - The hall of fame page shows a list of the top 5 users that have collected all fruit.
-- The list will sort the users from least amount of lives lost to most.
+- The list will sort the user's from least amount of lives lost to most.
 
 ![Hall of fame](readme-assets/images/hall_of_fame.png)
 
@@ -149,107 +166,12 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 
 ### Future Features
 
-- Enable user to spend a life for a hint, or multiple lives to solve a letter.
+- Enable the user to spend a life for a hint, or multiple lives to solve a letter.
 - Different difficulty modes. Harder would entail less lives or if the player dies the fruits collected list is reset.
 
 ## Testing
 
-I have tested this project by running the code through a validator at [Pep8online.com](http://pep8online.com/), which showed no faults.
-
-I have also manually tested the game by trying to input invalid characters as well as trying to leave the input blank, or by inputting too many characters at any point where the user is asked for an input.
-
-I have also asked friends, family, and anybody with the code institute on slack to try and find any bugs within the game.
-
-I also checked that the google worksheets were updating correctly when a users login was created, and when a user was entered into the hall of fame which uses a separate worksheet.
-
-### Feature testing
-
-- Welcome Page
-    * Inputing anything other then Y or N prints informs the user 'You must choose Y or N'.
-    * If the user chooses 'Y' they are directed to the log in page as intended.
-    * If the user chooses 'N' they are directed to the create user page as intended.
-- Create user Page
-    * Selecting a username that already exists notifies the user that the name is already taken.
-    * Leaving the username blank warns the user that their name cannot be blank.
-    * Entering numbers or any special character within the username notifies the user that only letters are allowed.
-    * Entering a username above 15 characters long notifies the user that the name chosen is too long.
-    * Entering a username will always display the name back to the user in lower case with the first letter capitalised regardless of what the case was when entered.  
-    * When verifying the username the create user function will start over if user inputs anything other then 'Y'.
-    * If the user verifies their chosen name they are then instructed to choose a PIN as intended.
-    * If the user enters letters as a PIN, has a PIN longer then 4 digits, or leaves the PIN blank they are notified that the PIN must be 4 digits long and consist only of numbers.
-    * If the verified PIN does not match the chosen PIN then the chosen PIN process is restarted.
-    * Once the chosen PIN and verified PIN match the user is taken to the main menu as intended.
-    * Entering a username as LOGIN (not case sensitive) will take the user to the log in page as intended.
-    * Users worksheet in googlesheets is correctly updated with username and PIN when user is created.
-- Log in Page
-    * Entering any name that does not exist notifies the user that the name they've chosen does not exists and asks them wether they would like to create a user login.
-    * If the user is asked wether they would like to create a user login and they choose 'Y' they are taken to the create user page as intended. If they choose 'N', the log in page is restarted. Any other input notifies the user that the input is invalid and restarts the log in page.
-    * Entering a name that exists regardless of case will then ask you for your PIN.
-    * Entering anything other then the correct PIN number will notify the user that the PIN was incorrect and take them back to the beginning of the log in page.
-    * A succesfull PIN will take the user to the main menu as intended.
-    * PINS are matched sucessfully to the right user by pulling the correct cells from the users worksheet in googlesheets.
-- Main Menu
-    * Any input other then the numbers 1-5 wil notify the user that the input is not recognised and to try again.
-    * Every option on the menu takes the user to the correct screen.
-- Game Play
-    * Leaving the input blank will notify the user that they didn't submit anything and to try again.
-    * Entering a number or special character will notify the user that only letter are allowed.
-    * Entering one letter regardless of case will either notify the user that the chosen letter is in the word or not.
-    * Entering a letter that you have already chosen informs the user that they've already guessed that letter and to try again.
-    * Entering EXIT in any case will return the user to the main menu as intended.
-    * If the letter chosen is correct then any underscores that represent that letter will update to show this.
-    * If the chosen letter is not in the word the lives display will update to show one less.
-    * Entering more then one letter will register as the user trying to guess the whole word as intended.
-    * If the users guess is incorrect they will be notified that it is not the word and the lives display will update to show one less.
-    * If users guess is correct or there are no more letters left to guess then they are notified that they were succesfull and asked if they want to play again. Any input other then 'ENTER' or 'N' will inform the user that the character was not recognised and will re-ask the question.
-    * Hitting ENTER after a succesfull round will begin another as intended.
-    * Selecting 'N' after a succesfull round will take the user back to the main menu as intended.
-    * Losing all lives will display a message informing the user that have lost and gives them the option to play again or go back to the main menu.
-    * When the user loses all lives and is asked if they want to play again or exit to the menu, any character other then 'Y' or 'N' informs the user that the character is not recognised and is asked again for an input.
-    * If the user has collected all the fruit and tries to play a game they will be notified that they have already collected all fruit and if they wish to reset the fruits collected list to play again. If the user selects 'Y' the list will be reset and another game will begin. If the user chooses 'N' or any other character they will be returned to the menu.
-    * Guessing a fruit updates the correct cell in the users worksheet in google sheets.
-    * Losing a life updates the the correct cell in the users worksheet in google sheets.
-    * Losing all lives updates the correct cell in the users worksheet in google sheets.
-    * Guessing all fruits correctly updates the hof worksheet in google sheets.
-    * Reseting the list wipes the correct cell in the user worksheet in google sheets.
-- How to play
-    * Hitting enter cycles through the rules of how to play and exits when finished as intended.
-- Fruits collected
-    * The fruits collected page closes back to the menu as soon as the user hits ENTER as intended.
-    * Hitting the ENTER key regardelss of any other inputs typed, will returning the user to the main menu as intended.
-    * The user is informed if they have 0 fruits collected. 
-    * If the user has between 1 and 14 fruits the page will inform the user how many fruits they have found and will display each fruit collected. It will only display up to 5 fruits on each line.
-    * If the user has collected all 15 fruits the page will congratulate the user and ask if they want the list to be reset. Choosing 'Y' notifies the user the list has been reset and takes them back to the menu. Chossing 'N' takes the user back to the main menu. Any other input informs the user that it is not recognised and asks the user for an input again.
-    * Reseting the list wipes the correct cell in the user worksheet in google sheets.
-- Hall of Fame
-    * ENTER key will return user to main menu regardless of input.
-    * Hall of fame displays top 5 users in order of lives lost, least to highest, as intended.
-    * If there is less then 5 people who have reached the hall of fame the game will populate the spaces with underscores.
-    * Information gathered for the hall of fame is correctly gathered from the hof worksheet in google sheets.
-
-
-
-## Bugs
-
-### Solved Bugs
-
-- The length of the fruits collected list would always be one over. This is because when the user is created in the create_user function the cell containing the fruits collected could not be left blank, so you would have to input an empty string. This would then be read as an entry meaning the length of the list would always read that empty string as 1. Fixed this issue by removing the blank string with the line 'fruits_coll_li.remove('')'.
-
-- When creating the game I originally had no spaces between the underscores where the unsolved word was displayed. I found that this was hard for the user to distinguish how many letters were in the word, so I inserted a space in between each underscore. This introduced a bug where the game wouldn't end if you guessed each letter of the word individually. This was because in order for the game to recognise that you had guessed the word I had an if statement that read 'if answer == fruit', so that if anytime the answer that was being updated with each guess matched the fruit trying to be guessed then you would win. But because I now had put spaces in between the characters the answer would never match the fruit exactly. I solved this by changing what the game was looking for to determine a correct answer. I updated the if statement to see if there were no underscores left in the answer, as that would also mean every letter had been discovered. 
-
-- When creating a new user if the pins didn't match the user would be asked again for the pin. On this second go the user could create a pin of any length with any characters. This happened because I had forgotten to insert the same while loop that checked the pins length and to make sure it was only numbers.
-
-- When creating a new user you could enter the same name as an existing user if you capitalise the first letter. Fixed by using the .lower() method on the users input to check against the names on google sheets.
-
-- Originally I had the code to update the lives display inside the play function but found that it wouldnt update correctly. I ran print logs to check that the lives and lives lost counter was updating correctly which they were but it wasn't transferring over to the display. I couldn't figure out why but once I had created the update_game_screen function and implemented the lives display into it, it worked fine.
-
-- When creating the hall of fame function the game would crash if there weren't at least 5 names to be displayed. This was because the game is trying to retrieve information from google sheets that is not there. I fixed this by creating an if and a for loop. Which stated that if the length of all the information gathered was less than 5 (meaning there were less than 5 entries on google sheets), to append the list with blank information until there are 5 entries.
-
-- When guessing the word as a whole I noticed that the gaps between the letters would dissapear. So instead of displaying like this 'A P P L E' it would display like this 'APPLE'. It was a very subtle change but it bugged me. No pun intended. This was happening because I had the code 'answer = fruit' if you guessed the word right, so that the display would change to the word you're trying to guess. I fixed this by inputting a simple 'for loop' that ran through the letters of the fruit, adding an extra space to each one, and then updating the answer.
-
-### Unsolved Bugs
-
-- No bugs remaining.
+Testing and results can be found [here](TESTING.md).
 
 ## Deployment
 
@@ -325,5 +247,7 @@ This project was deployed using Code Institute's mock terminal for Heroku and li
 
 - The code linking the APIs is credited to [The Code Institute](codeinstitute.net) from their 'Love Sandwiches' project.
 - The code to clear the console is credited to [Stackoverflow.com](https://stackoverflow.com/questions/2084508/clear-terminal-in-python).
-- The code to sort a list of lists by its second entry is credited to [Geeksforgeeks.org](https://www.geeksforgeeks.org/python-sort-list-according-second-element-sublist/)
+- The code to sort a list of lists by its second entry is credited to [Geeksforgeeks.org](https://www.geeksforgeeks.org/python-sort-list-according-second-element-sublist/).
+- The code to pause the game is credited to [realpython.com](https://realpython.com/python-sleep/).
+- The code to change the colour of text is credited to [pypi.org](https://pypi.org/project/colorama/)
 - Credit goes to daisygunn_5p at The Code Institute for helping me figure out how to update single cells in google sheets.
