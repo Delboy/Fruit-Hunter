@@ -249,5 +249,4 @@ This project was deployed using Code Institute's mock terminal for Heroku and li
 - The code to clear the console is credited to [Stackoverflow.com](https://stackoverflow.com/questions/2084508/clear-terminal-in-python).
 - The code to sort a list of lists by its second entry is credited to [Geeksforgeeks.org](https://www.geeksforgeeks.org/python-sort-list-according-second-element-sublist/).
 - The code to pause the game is credited to [realpython.com](https://realpython.com/python-sleep/).
-- The code to change the colour of text is credited to [pypi.org](https://pypi.org/project/colorama/)
 - Credit goes to daisygunn_5p at The Code Institute for helping me figure out how to update single cells in google sheets.
