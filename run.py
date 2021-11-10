@@ -46,7 +46,7 @@ def welcome():
         login()
     elif user_choice.upper() == 'N':
         clear_console()
-        create_user()
+        create_user(0)
     else:
         clear_console()
         print(BR * 8)
@@ -55,7 +55,7 @@ def welcome():
         welcome()
 
 
-def create_user():
+def create_user(username):
     """
     Creates user log-in.
     """
@@ -63,9 +63,12 @@ def create_user():
     clear_console()
     print(BR * 8)
     # Creates username
-    user_name = input(
-        ' ' * 14 + 'Please choose a username or type LOGIN to sign in: '
-        )
+    if isinstance(username, str) is True:  # credit to stackoverflow
+        user_name = username
+    else:
+        user_name = input(
+            ' ' * 14 + 'Please choose a username or type LOGIN to sign in: '
+            )
     while (len(user_name) > 15) or (user_name.lower() in users) or \
             (user_name == '') or (user_name.isalpha() is False) or \
             (user_name.upper() == 'LOGIN'):
@@ -141,7 +144,7 @@ def create_user():
         WKS.append_row(new_user)
         clear_console()
         print(BR * 8)
-        print(C('Success! User created! Your log in details are:'))
+        print(C('Success! User created! Your login details are:'))
         print(C(f'User Name: {user_name.capitalize()}'))
         print(C(f'PIN: {user_pin}'))
         time.sleep(3)
@@ -150,7 +153,7 @@ def create_user():
         user_num = users.index(user_name) + 1
         menu()
     else:
-        create_user()
+        create_user(0)
 
 
 def login():
@@ -185,6 +188,13 @@ def login():
             print(C('Sorry the PIN is not correct. Please try again.'))
             time.sleep(3)
             login()
+    elif len(user_name) > 15 or user_name == '' \
+            or user_name.isalpha() is False:
+        clear_console()
+        print(BR * 8)
+        print(C('Sorry that name is not valid. Please try again.'))
+        time.sleep(3)
+        login()
     else:
         clear_console()
         print(BR * 8)
@@ -193,8 +203,17 @@ def login():
             ' ' * 18 + 'Would you like to create a user login? Y/N: '
             )
         if user_input.upper() == 'Y':
-            create_user()
+            create_user(user_name)
         elif user_input.upper() == 'N':
+            login()
+        elif user_input == '':
+            clear_console()
+            print(BR * 8)
+            print(C(
+                'Sorry, you did not enter a valid input. '
+                'Returning to login.'
+                ))
+            time.sleep(2)
             login()
         else:
             clear_console()
