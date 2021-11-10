@@ -276,28 +276,36 @@ def play():
             'Oh no! It looks like you\'ve already collected all the fruit!'
             ))
         print(C('Check to see if you\'ve reached the hall of fame!'))
-        print(C('Would you like to reset the list and play again?'))
-        user_input = input(' ' * 37 + 'Y/N: ')
-        if user_input.upper() == 'Y':
-            WKS.update_cell(user_num, 3, '')
-            WKS.update_cell(user_num, 4, 0)
-            WKS.update_cell(user_num, 5, 0)
-            clear_console()
-            print(4 * BR)
-            print(C('List has been reset.'))
-            time.sleep(2)
-            play()
-        elif user_input.upper() == 'N':
-            print(C("You selected 'NO'. Returning to the main menu"))
-            time.sleep(2)
-            menu()
-        else:
-            print(C(
-                'That character was not recognised. Returning to the main menu'
-                ))
-            time.sleep(2)
-            menu()
-
+        print(BR)
+        print(C('Type RESET to reset the list and play again'))
+        print(C('or hit ENTER to return to the main menu.'))
+        user_input = input(' ' * 38 + ': ')
+        while True:
+            if user_input.upper() == 'RESET':
+                WKS.update_cell(user_num, 3, '')
+                WKS.update_cell(user_num, 4, 0)
+                WKS.update_cell(user_num, 5, 0)
+                clear_console()
+                print(8 * BR)
+                print(C('List has been reset. Returning to main menu.'))
+                time.sleep(2)
+                menu()
+            elif user_input.upper() == '':
+                clear_console()
+                print(8 * BR)
+                print(C("Returning to the main menu"))
+                time.sleep(2)
+                menu()
+            else:
+                clear_console()
+                print(BR * 8)
+                print(C('Sorry, that character is not recognised.'))
+                print(C(
+                    'Please type RESET to clear the list '
+                    'or hit ENTER to return to the menu.'
+                    ))
+                user_input = input(' ' * 39 + ': ')
+        
     clear_console()
     user_info = WKS.row_values(user_num)
     fruit = random_fruit()
@@ -498,7 +506,7 @@ def rules():
         'If all lives are lost you lose the game',
         "But dont worry as any fruit you've already found are saved!",
         'You can view the fruit you\'ve found in the fruits collected screen',
-        'Find all the fruit you win the game '
+        'Find all the fruit, you win the game '
         'and get entered into the hall of fame!',
         'Happy hunting!'
     ]
@@ -552,11 +560,11 @@ def fruit_li():
         print(C(', '.join(mid_li)))
         print(C(', '.join(bot_li)))
         print(BR)
-        user_input = input(
-            ' ' * 20 + 'Would you like to reset the list? Y/N: '
-            )
+        print(C('Type RESET to reset the list'))
+        print(C('or press ENTER to return to the main menu.'))
+        user_input = input(38 * ' ' + ': ')
         while True:
-            if user_input.upper() == 'Y':
+            if user_input.upper() == 'RESET':
                 WKS.update_cell(user_num, 3, '')
                 WKS.update_cell(user_num, 4, 0)
                 WKS.update_cell(user_num, 5, 0)
@@ -565,15 +573,19 @@ def fruit_li():
                 print(C('List has been reset. Returning to main menu.'))
                 time.sleep(2)
                 menu()
-            elif user_input.upper() == 'N':
+            elif user_input.upper() == '':
+                clear_console()
+                print(BR * 8)
+                print(C('Returning to the main menu.'))
+                time.sleep(2)
                 menu()
             else:
                 clear_console()
                 print(BR * 8)
                 print(C('Sorry, that character is not recognised.'))
                 print(C(
-                    'Please input Y to clear the list '
-                    'or N to return to the menu.'
+                    'Please type RESET to clear the list '
+                    'or hit ENTER to return to the menu.'
                     ))
                 user_input = input(' ' * 39 + ': ')
     elif fruits_collected == '':
