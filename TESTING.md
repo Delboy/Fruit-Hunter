@@ -66,6 +66,7 @@ I have tested this project by running the code through a validator at [Pep8onlin
 ### Login Page
 - Entering any name that does not exist notifies the user that the name they've chosen does not exists and asks them whether they would like to create a user login.
 - If the user is asked whether they would like to create a user login and they choose 'Y' they are taken to the create user page as intended. If they choose 'N', the login page is restarted. Any other input notifies the user that the input is invalid and restarts the login page.
+- Entering a name that would of been invalid when creating a user notifies the user that the name is invalid.
 - Entering a name that exists regardless of case will then ask you for your PIN.
 - Entering anything other than the correct PIN number will notify the user that the PIN was incorrect and take them back to the beginning of the login page.
 - A succesful PIN will take the user to the main menu as intended.
@@ -90,7 +91,7 @@ I have tested this project by running the code through a validator at [Pep8onlin
 - Selecting 'N' after a successfull round will take the user back to the main menu as intended.
 - Losing all lives will display a message informing the user that they have lost and gives them the option to play again or go back to the main menu.
 - When the user loses all lives and is asked if they want to play again or exit to the menu, any character other than 'Y' or 'N' informs the user that the character is not recognised and is asked again for an input.
-- If the user has collected all the fruit and tries to play a game they will be notified that they have already collected all fruit and if they wish to reset the fruits collected list to play again. If the user selects 'Y' the list will be reset and another game will begin. If the user chooses 'N' or any other character they will be returned to the menu.
+- If the user has collected all the fruit and tries to play a game they will be notified that they have already collected all fruit and if they wish to reset the fruits collected list to play again. If the user types 'RESET' regardless of case,  the list will be reset and another game will begin. If the user hits the ENTER key they will be returned to the menu.
 - Confirmed that no fruits appear twice.
 - Guessing a fruit updates the correct cell in the users worksheet in google sheets.
 - Losing a life updates the correct cell in the users worksheet in google sheets.
@@ -105,7 +106,7 @@ I have tested this project by running the code through a validator at [Pep8onlin
 - The fruits collected page closes back to the menu as soon as the user hits ENTER as intended. Any typed inputs from the user are ignored.
 - The user is informed if they have 0 fruits collected. 
 - If the user has between 1 and 14 fruits the page will inform the user how many fruits they have found and will display each fruit collected. It will only display up to 5 fruits on each line.
-- If the user has collected all 15 fruits the page will congratulate the user and ask if they want the list to be reset. Choosing 'Y' notifies the user the list has been reset and takes them back to the menu. Choosing 'N' takes the user back to the main menu. Any other input informs the user that it is not recognised and asks the user for an input again.
+- If the user has collected all 15 fruits the page will congratulate the user and ask if they want the list to be reset. Typing RESET regardless of case, notifies the user the list has been reset and takes them back to the menu. Hitting the ENTER key takes the user back to the main menu. Any other input informs the user that it is not recognised and asks the user for an input again.
 - Resetting the list wipes the correct cell in the user worksheet in google sheets.
 
 ### Hall of Fame
