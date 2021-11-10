@@ -56,10 +56,10 @@ User's try to find all the fruit by playing a hangman style game. There are 15 d
 I used [lucidchart.com](https://lucid.co/) to help design the project and create the following flowcharts. 
 
 ### Main menu flowchart :
-![Main Flowchart](readme-assets/images/main-flow.png)
+![Main Flowchart](readme-assets/images/main_flow.png)
 
 ### Gameplay flowchart :
-![Gameplay Flowchart](readme-assets/images/game-flow.png)
+![Gameplay Flowchart](readme-assets/images/game_flow.png)
 
 ## Features
 
@@ -75,12 +75,13 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 - If the user has made a mistake at the welcome screen and instead wants to login they can type 'login' to be directed to the login page. 
 - Once verified the user's chosen username and PIN number is stored on a 'users' worksheet inside google sheets.
 
-![choose_username](readme-assets/images/choose_username.png)
-![choose_pin](readme-assets/images/choose_pin.png)
+![Choose username](readme-assets/images/choose_username.png)
+![Verify username](readme-assets/images/verify_username.png)
+![Choose pin](readme-assets/images/choose_pin.png)
 
 - The create_user function will check to make sure the username is not already taken before completing.
 
-![username_taken](readme-assets/images/username_taken.png)
+![Username taken](readme-assets/images/username_taken.png)
 
 - It will also not allow the user to create a login name over 15 characters long, or to input nothing.
 
@@ -89,12 +90,13 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 
 - It will also verify the user's PIN before allowing the user's info to be created.
 
-![verify_pin](readme-assets/images/verify_pin.png)
+![Verify pin](readme-assets/images/verify_pin.png)
+![Pins not matching](readme-assets/images/pins_do_not_match.png)
 
 - Once the user has chosen a valid name and PIN code their user details will be created and uploaded to the 'users' worksheet inside google sheets.
 - The user will then be logged in and sent to the main menu.
 
-![user_created](readme-assets/images/user_created.png)
+![User created](readme-assets/images/user_created.png)
 
 ### Login page
 - The login page will ask the user for their login name and PIN code.
@@ -123,7 +125,7 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 ### How to play page
 - The how to play page shows the user the rules of the game. Hitting enter cycles through each point.
 
-![How to play](readme-assets/images/how_to_play.gif)
+![How to play](readme-assets/images/how_to_play.png)
 
 ### Fruits collected page
 - Everytime the user collects a fruit when playing, it will be added to their information in the 'users' worksheet.
@@ -147,11 +149,17 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
     - A 'lives' display which shows filled hearts that deplete when an incorrect answer is given.
     - Underscores representing how many letters are left to discover in the word.
     - A user input area where the user inputs their answers.
-    - Feedback that informs if the user has answered correctly, incorrectly, input an unrecognised character, or if they have tried a letter twice.
+    - Feedback that informs if the user has answered correctly, incorrectly, input an invalid character, tried a letter twice or input nothing at all.
 
 ![Game Area](readme-assets/images/game_area.png)
 
+![Incorrect](readme-assets/images/incorrect_lose_life.png)
+
+![Invalid Character](readme-assets/images/invalid_character.png)
+
 ![Already Guessed](readme-assets/images/already_guessed.png)
+
+![Blank Input](readme-assets/images/blank_input.png)
 
 - The user can guess one letter at a time or they can try to guess the whole word in one.
 
