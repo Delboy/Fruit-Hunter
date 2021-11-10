@@ -94,13 +94,14 @@ def create_user():
             user_name = input(' ' * 27 + 'Please choose a username: ')
         if user_name.upper() == 'LOGIN':
             login()
+    # Validates username chosen.
     clear_console()
     print(BR * 8)
     print(C(
         f'You chose the username {user_name.capitalize()}. Is this correct?'
         ))
     validate_name = input(' ' * 37 + 'Y/N: ')
-    # Creates user's PIN number
+    # Creates user's PIN number.
     if validate_name.upper() == 'Y':
         clear_console()
         print(BR * 8)
@@ -115,6 +116,7 @@ def create_user():
                 ))
             print(C('Please try again.'))
             user_pin = input(' ' * 37 + 'PIN: ')
+        # Verifys users PIN.
         clear_console()
         print(BR * 8)
         verify_pin = input(' ' * 28 + 'Please verify the PIN: ')
@@ -305,7 +307,9 @@ def play():
                     'or hit ENTER to return to the menu.'
                     ))
                 user_input = input(' ' * 39 + ': ')
-        
+    
+    # Resets the lives and letters guessed list.
+    # Sets the underscores to the answers length.
     clear_console()
     user_info = WKS.row_values(user_num)
     fruit = random_fruit()
@@ -320,6 +324,7 @@ def play():
     print(C(answer))
     print(C(BR))
 
+    # Runs while user still has lives left.
     while lives > 0:
         guess = input(
             ' ' * 15 + 'Guess the fruit or a letter or type EXIT to leave: '
@@ -342,6 +347,9 @@ def play():
             elif guess in fruit:
                 guessed.append(guess)
                 answer = ''
+                # Displays letter if said letter is in both
+                # the fruit and the guessed list, otherwise
+                # displays an underscore.
                 for x in fruit:
                     if x in guessed:
                         answer += str(x + ' ')
@@ -366,6 +374,7 @@ def play():
             WKS.update_cell(user_num, 3, updated_fruits)
             check_fruits(user_num)
             answer = ''
+            # Displays answer with gap between characters.
             for x in fruit:
                 answer += str(x + ' ')
             # Adds user to hall of fame if all fruits found.
@@ -550,6 +559,8 @@ def fruit_li():
     print(C('Fruits Collected'))
     print(BR)
 
+    # Runs if all fruits have been found.
+    # User can reset list here.
     if len(fruits_coll_li) == len(fruits):
         print(C('Well done!'))
         print(C(
@@ -588,6 +599,7 @@ def fruit_li():
                     'or hit ENTER to return to the menu.'
                     ))
                 user_input = input(' ' * 39 + ': ')
+    # Runs if user has collected no fruit.
     elif fruits_collected == '':
         print(C("Sorry, you haven't collected any fruits yet!"))
         user_input = input(
@@ -597,6 +609,7 @@ def fruit_li():
             menu()
         else:
             menu()
+    # Runs if user has collected some but not all fruit.
     else:
         print(C(
             f'There are {len(fruits)} fruits to collect. '
@@ -649,6 +662,7 @@ def display_hof():
     print(C('HALL OF FAME'))
     print(BR)
     index = 1
+    # Creates string that displays users info.
     for x in all:
         print(
             ' ' * 18 + str(index) +
