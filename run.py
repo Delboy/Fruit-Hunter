@@ -309,9 +309,9 @@ def play():
                 WKS.update_cell(user_num, 5, 0)
                 clear_console()
                 print(8 * BR)
-                print(C('List has been reset. Returning to main menu.'))
+                print(C('List has been reset.'))
                 time.sleep(2)
-                menu()
+                play()
             elif user_input.upper() == '':
                 clear_console()
                 print(8 * BR)
@@ -506,6 +506,7 @@ def update_game_screen(msg):
     print(C(answer))
     print(BR)
     print(C(msg))
+    print(BR)
 
 
 def random_fruit():
