@@ -339,7 +339,7 @@ def play():
     answer = '_ ' * len(fruit)
     guessed = []
     print(BR * 6)
-    print(Fore.MAGENTA)
+    print(Fore.RED)
     print(C((u'\u2764' + ' ') * lives))
     print(Style.RESET_ALL)
     print(BR)
@@ -499,7 +499,7 @@ def update_game_screen(msg):
     clear_console()
     lost_lives = 5 - lives
     print(BR * 6)
-    print(Fore.MAGENTA)
+    print(Fore.RED)
     print(C(((u'\u2764' + ' ') * lives) + ((u'\u2661' + ' ') * lost_lives)))
     print(Style.RESET_ALL)
     print(BR)
