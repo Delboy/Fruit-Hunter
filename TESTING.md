@@ -78,6 +78,7 @@ I have tested this project by running the code through a validator at [Pep8onlin
 - Inputting anything other than Y or N informs the user 'You must choose Y or N'.
 - If the user chooses 'Y' they are directed to the login page as intended.
 - If the user chooses 'N' they are directed to the create user page as intended.
+- Any blank space before or after input is ignored.
 
 ### Create user Page
 - Selecting a username that already exists notifies the user that the name is already taken.
@@ -86,6 +87,7 @@ I have tested this project by running the code through a validator at [Pep8onlin
 - Entering a username above 15 characters long notifies the user that the name chosen is too long.
 - Entering a username will always display the name back to the user in lower case with the first letter capitalised regardless of what the case was when entered.  
 - When verifying the username the create user function will start over if the user inputs anything other than 'Y'.
+- Any blank spaces during name vaidation are ignored.
 - If the user verifies their chosen name they are then instructed to choose a PIN as intended.
 - If the user enters letters as a PIN, has a PIN longer than 4 digits, or leaves the PIN blank they are notified that the PIN must be 4 digits long and consist only of numbers.
 - If the verified PIN does not match the chosen PIN then the chosen PIN process is restarted.
@@ -99,16 +101,19 @@ I have tested this project by running the code through a validator at [Pep8onlin
 - Entering a name that would of been invalid when creating a user notifies the user that the name is invalid.
 - Entering a name that exists regardless of case will then ask you for your PIN.
 - Entering anything other than the correct PIN number will notify the user that the PIN was incorrect and take them back to the beginning of the login page.
+- Entering spaces before or after username entry will be ignored.
 - A succesful PIN will take the user to the main menu as intended.
 - PINS are matched successfully to the right user by pulling the correct cells from the users worksheet in google sheets.
 
 ### Main Menu
 - Any input other than the numbers 1-5 will notify the user that the input is not recognised and to try again.
+- Any blank space before or after input is ignored.
 - Every option on the menu takes the user to the correct screen.
 
 ### Game Play
 - Leaving the input blank will notify the user that they didn't submit anything and to try again.
 - Entering either 2 or 3 letters will notify the user that they must guess one letter at a time or the whole word.
+- Any blank space before or after input is ignored.
 - Entering a number or special character will notify the user that only letters are allowed.
 - Entering one letter regardless of case will either notify the user that the chosen letter is in the word or not.
 - Entering a letter that you have already chosen informs the user that they've already guessed that letter and to try again.
@@ -138,6 +143,7 @@ I have tested this project by running the code through a validator at [Pep8onlin
 - The user is informed if they have 0 fruits collected. 
 - If the user has between 1 and 14 fruits the page will inform the user how many fruits they have found and will display each fruit collected. It will only display up to 5 fruits on each line.
 - If the user has collected all 15 fruits the page will congratulate the user and ask if they want the list to be reset. Typing RESET regardless of case, notifies the user the list has been reset and takes them back to the menu. Hitting the ENTER key takes the user back to the main menu. Any other input informs the user that it is not recognised and asks the user for an input again.
+- Any blank space before or after input is ignored.
 - Resetting the list wipes the correct cell in the user worksheet in google sheets.
 
 ### Hall of Fame
