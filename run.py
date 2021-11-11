@@ -384,6 +384,10 @@ def play():
                 update_game_screen(
                     'Sorry that character is invalid. Please try again.'
                     )
+        elif len(guess) < 4:
+            update_game_screen(
+                'Please guess only 1 letter or the whole word.'
+            )
         elif guess == '':
             update_game_screen(
                 'Whoops! Looks like you didn\'t submit anything. Try again.'

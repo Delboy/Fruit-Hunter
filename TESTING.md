@@ -108,6 +108,7 @@ I have tested this project by running the code through a validator at [Pep8onlin
 
 ### Game Play
 - Leaving the input blank will notify the user that they didn't submit anything and to try again.
+- Entering either 2 or 3 letters will notify the user that they must guess one letter at a time or the whole word.
 - Entering a number or special character will notify the user that only letters are allowed.
 - Entering one letter regardless of case will either notify the user that the chosen letter is in the word or not.
 - Entering a letter that you have already chosen informs the user that they've already guessed that letter and to try again.
