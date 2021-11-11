@@ -26,21 +26,51 @@ I have tested this project by running the code through a validator at [Pep8onlin
 *As a user I want to be able to understand the rules of the game.*
 - From the main menu users can access the 'How to play' screen which explains the rules of the game.
 
+![How to play](readme-assets/images/how_to_play.png)
+
 *As a user I want the game to be intuitive.*
 - The user is guided through every step of the create user and login process with clear concise questions.
+
+![Choose Username](readme-assets/images/choose_username.png)
+
 - Any wrong input from the user is met with an error message explaining their mistake and re-asking the question.
+
+![Blank Input](readme-assets/images/blank_input.png)
+
 - The menu is simplistic and the options are clearly labelled.
+
+![Main Menu](readme-assets/images/main_menu.png)
+
 - During gameplay the user is guided with what to do next and has constant feedback after their actions.
+
+![Correct Letter](readme-assets/images/correct_letter.png)
+
 - Minimal inputs are needed when questions are asked and in some cases any key will perform the correct function, like leaving a menu that has no other options inside.
+
+![Hall of fame](readme-assets/images/hall_of_fame.png)
 
 *As a user I want feedback on my progress.*
 - The 'Collected Fruits' screen from the main menu lists all fruits you have found and shows you how many in total are left to find.
+
+![Fruits collected](readme-assets/images/fruits_collected.png)
+
 - In gameplay there is a visual representation of the letters you have guessed correctly and a lives display which updates everytime you answer incorrectly.
+
+![Incorrect lose life](readme-assets/images/incorrect_lose_life.png)
+
 - If you have completed the game you may find your overall score in the 'Hall of Fame' screen if you managed to score high enough. 
+
+![Hall of fame](readme-assets/images/hall_of_fame.png)
 
 *As a user I want to be able to save my progress.*
 - The user is asked at the very beginning to create a login username and PIN code.
+
+![Choose username](readme-assets/images/choose_username.png)
+![Choose PIN](readme-assets/images/choose_pin.png)
+
 - Once the user has a login the game will record all their found fruits along with lives losts and deaths.
+
+![User Created](readme-assets/images/user_created.png)
 
 ## Feature testing
 
