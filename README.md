@@ -26,6 +26,9 @@ User's try to find all the fruit by playing a hangman style game. There are 15 d
     * [Game play](#game-play)
     * [Future Features](#future-features)
 - [Testing](#testing)
+- [Technologies](#technologies)
+    * [Languages Used](#languages-used)
+    * [Libraries and Programs Used](#libraries-and-programs-used)
 - [Deployment](#deployment)
     * [Creation](#creation)
     * [Github pages](#github-pages)
@@ -186,6 +189,39 @@ I used [lucidchart.com](https://lucid.co/) to help design the project and create
 
 Testing and results can be found [here](TESTING.md).
 
+## Technologies 
+
+### Languages Used
+
+-   [Python](https://www.python.org/)
+
+### Libraries and Programs Used
+
+- [Git](https://git-scm.com/)
+    - Version control.
+- [GitHub](https://github.com/)
+    - For storing code and deploying the site.
+- [Gitpod](https://www.gitpod.io/)
+    - Used for editing my code.
+- [Google Sheets](https://docs.google.com/spreadsheets/)
+    - To store user's login information and progress.
+- [Gspread](https://docs.gspread.org/en/latest/)
+    - API to enable python to access google sheets.
+- [Os library](https://docs.python.org/3/library/os.html)
+    - Used to help clear the console.
+- [Time library](https://docs.python.org/3/library/time.html)
+    - Used to help pause the game.
+- [Random library](https://docs.python.org/3/library/random.html)
+    - Used to help generate a random fruit.
+- [Colorama](https://pypi.org/project/colorama/)
+    - Used to colour the hearts red in the lives display.
+- [Heroku](https://www.heroku.com/)
+    - To deploy project.
+- [Lucidchart.com](https://lucid.co/)
+    - To help me design my flowcharts.
+- [Am I responsive](http://ami.responsivedesign.is/)
+    - To generate the image at the beginning of the README.
+
 ## Deployment
 
 This project was deployed using Code Institute's mock terminal for Heroku and links to a Google Sheet API.
@@ -300,6 +336,7 @@ This project was deployed using Code Institute's mock terminal for Heroku and li
 - The code linking the APIs is credited to [The Code Institute](codeinstitute.net) from their 'Love Sandwiches' project.
 - The code to clear the console is credited to [Stackoverflow.com](https://stackoverflow.com/questions/2084508/clear-terminal-in-python).
 - The code to sort a list of lists by its second entry is credited to [Geeksforgeeks.org](https://www.geeksforgeeks.org/python-sort-list-according-second-element-sublist/).
+- The code used to colour the hearts is credited to [pypi.org](https://pypi.org/project/colorama/)
 - I used [ami.responsivedesign.is](http://ami.responsivedesign.is/) for the responsive image.
 - The code to pause the game is credited to [realpython.com](https://realpython.com/python-sleep/).
 - Credit goes to daisygunn_5p at The Code Institute for helping me figure out how to update single cells in google sheets.
