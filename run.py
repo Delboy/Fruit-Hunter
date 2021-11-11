@@ -41,7 +41,7 @@ def welcome():
     print(BR * 4)
     print(C('Welcome to FRUIT HUNTER!'))
     print(BR * 4)
-    user_choice = input(' ' * 25 + 'Have you played before? Y/N: ')
+    user_choice = input(' ' * 25 + 'Have you played before? Y/N: ').strip()
     if user_choice.upper() == 'Y':
         clear_console()
         login()
@@ -104,7 +104,7 @@ def create_user(username):
     print(C(
         f'You chose the username {user_name.capitalize()}. Is this correct?'
         ))
-    validate_name = input(' ' * 37 + 'Y/N: ')
+    validate_name = input(' ' * 37 + 'Y/N: ').strip()
     # Creates user's PIN number.
     if validate_name.upper() == 'Y':
         clear_console()
@@ -165,7 +165,7 @@ def login():
     clear_console()
     print(BR * 8)
     print(C('Please log in'))
-    user_name = input(' ' * 32 + 'User Name: ').lower()
+    user_name = input(' ' * 32 + 'User Name: ').lower().strip()
     # Checks if user name exists.
     if user_name in users:
         clear_console()
@@ -202,7 +202,7 @@ def login():
         print(C(f'The username {user_name.capitalize()} does not exist.'))
         user_input = input(
             ' ' * 18 + 'Would you like to create a user login? Y/N: '
-            )
+            ).strip()
         if user_input.upper() == 'Y':
             create_user(user_name)
         elif user_input.upper() == 'N':
@@ -265,7 +265,7 @@ def menu():
     print(C('3. Fruits Collected'))
     print(C('4. Hall of Fame'))
     print(C('5. Exit'))
-    user_input = input(' ' * 40)
+    user_input = input(' ' * 40).strip()
     if user_input == '1':
         play()
     elif user_input == '2':
@@ -301,7 +301,7 @@ def play():
         print(BR)
         print(C('Type RESET to reset the list and play again'))
         print(C('or hit ENTER to return to the main menu.'))
-        user_input = input(' ' * 38 + ': ')
+        user_input = input(' ' * 38 + ': ').strip()
         while True:
             if user_input.upper() == 'RESET':
                 WKS.update_cell(user_num, 3, '')
@@ -326,7 +326,7 @@ def play():
                     'Please type RESET to clear the list '
                     'or hit ENTER to return to the menu.'
                     ))
-                user_input = input(' ' * 39 + ': ')
+                user_input = input(' ' * 39 + ': ').strip()
     
     # Resets the lives and letters guessed list.
     # Sets the underscores to the answers length.
@@ -350,7 +350,7 @@ def play():
     while lives > 0:
         guess = input(
             ' ' * 15 + 'Guess the fruit or a letter or type EXIT to leave: '
-            ).upper()
+            ).upper().strip()
         # Runs if users guess is one letter.
         if len(guess) == 1:
             if guess.isalpha() is False:
@@ -384,14 +384,14 @@ def play():
                 update_game_screen(
                     'Sorry that character is invalid. Please try again.'
                     )
-        elif len(guess) < 4:
-            update_game_screen(
-                'Please guess only 1 letter or the whole word.'
-            )
         elif guess == '':
             update_game_screen(
                 'Whoops! Looks like you didn\'t submit anything. Try again.'
                 )
+        elif len(guess) < 4:
+            update_game_screen(
+                'Please guess only 1 letter or the whole word.'
+            )
         elif guess.isalpha() is False:
             update_game_screen('Sorry, only letters are allowed.')
         # Runs if guess is longer then 1 character.
@@ -413,7 +413,7 @@ def play():
             user_input = input(
                 ' ' * 7 + 'Press ENTER to play again '
                 'or type N to go back to the main menu: '
-                )
+                ).strip()
             while True:
                 if user_input == '':
                     play()
@@ -427,8 +427,8 @@ def play():
                         'Please hit ENTER to play again '
                         'or N to return to the main menu.'
                         ))
-                    user_input = input(' ' * 39 + ': ')
-        elif guess.upper() == 'EXIT':
+                    user_input = input(' ' * 39 + ': ').strip()
+        elif guess.strip() == 'EXIT':
             menu()
         else:
             lives -= 1
@@ -452,7 +452,7 @@ def play():
             user_input = input(
                 ' ' * 7 + 'Press ENTER to play again '
                 'or type N to go back to the main menu: '
-                )
+                ).strip()
             while True:
                 if user_input == '':
                     play()
@@ -466,7 +466,7 @@ def play():
                         'Please hit ENTER to play again '
                         'or N to return to the main menu.'
                         ))
-                    user_input = input(' ' * 39 + ': ')
+                    user_input = input(' ' * 39 + ': ').strip()
     # Runs if user loses all lives.
     if lives == 0:
         clear_console()
@@ -479,7 +479,7 @@ def play():
         user_input = input(
             ' ' * 12 + 'Press Y to play again '
             'or N to go back to the main menu: '
-            )
+            ).strip()
         while True:
             if user_input.upper() == 'Y':
                 play()
@@ -493,7 +493,7 @@ def play():
                     'Please input Y to play again '
                     'or N to return to the main menu.'
                     ))
-                user_input = input(' ' * 39 + ': ')
+                user_input = input(' ' * 39 + ': ').strip()
 
 
 def update_game_screen(msg):
@@ -602,7 +602,7 @@ def fruit_li():
         print(BR)
         print(C('Type RESET to reset the list'))
         print(C('or press ENTER to return to the main menu.'))
-        user_input = input(38 * ' ' + ': ')
+        user_input = input(38 * ' ' + ': ').strip()
         while True:
             if user_input.upper() == 'RESET':
                 WKS.update_cell(user_num, 3, '')
@@ -627,7 +627,7 @@ def fruit_li():
                     'Please type RESET to clear the list '
                     'or hit ENTER to return to the menu.'
                     ))
-                user_input = input(' ' * 39 + ': ')
+                user_input = input(' ' * 39 + ': ').strip()
     # Runs if user has collected no fruit.
     elif fruits_collected == '':
         print(C("Sorry, you haven't collected any fruits yet!"))
