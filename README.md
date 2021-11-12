@@ -340,3 +340,4 @@ This project was deployed using Code Institute's mock terminal for Heroku and li
 - I used [ami.responsivedesign.is](http://ami.responsivedesign.is/) for the responsive image.
 - The code to pause the game is credited to [realpython.com](https://realpython.com/python-sleep/).
 - Credit goes to daisygunn_5p at The Code Institute for helping me figure out how to update single cells in google sheets.
+- Credit to Daniel_C_5p at The Code Institute for suggesting I strip out any blank chatacters before and after inputs.
