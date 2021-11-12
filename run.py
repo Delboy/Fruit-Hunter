@@ -67,9 +67,9 @@ def create_user(username):
     if isinstance(username, str) is True:  # credit to stackoverflow
         user_name = username
     else:
-        print(C('Please create a User Name'))
+        print(C('Please create a Username'))
         print(C('or type LOGIN to login'))
-        user_name = input(' ' * 32 + 'User Name: ').strip().lower()
+        user_name = input(' ' * 32 + 'Username: ').strip().lower()
     while (len(user_name) > 15) or (user_name in users) or \
             (user_name == '') or (user_name.isalpha() is False) or \
             (user_name == 'login') or (user_name == 'exit'):
@@ -148,7 +148,7 @@ def create_user(username):
         clear_console()
         print(BR * 8)
         print(C('Success! User created! Your login details are:'))
-        print(C(f'User Name: {user_name.capitalize()}'))
+        print(C(f'Username: {user_name.capitalize()}'))
         print(C(f'PIN: {user_pin}'))
         time.sleep(3)
         users = WKS.col_values(1)
@@ -167,8 +167,8 @@ def login():
     clear_console()
     print(BR * 8)
     print(C('Please log in'))
-    user_name = input(' ' * 32 + 'User Name: ').lower().strip()
-    # Checks if user name exists.
+    user_name = input(' ' * 32 + 'Username: ').lower().strip()
+    # Checks if username exists.
     if user_name in users:
         clear_console()
         print(BR * 8)
