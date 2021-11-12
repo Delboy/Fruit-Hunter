@@ -327,7 +327,7 @@ def play():
                     'or hit ENTER to return to the menu.'
                     ))
                 user_input = input(' ' * 39 + ': ').strip()
-    
+
     # Resets the lives and letters guessed list.
     # Sets the underscores to the answers length.
     clear_console()
@@ -631,6 +631,7 @@ def fruit_li():
     # Runs if user has collected no fruit.
     elif fruits_collected == '':
         print(C("Sorry, you haven't collected any fruits yet!"))
+        print(BR * 4)
         user_input = input(
             ' ' * 20 + 'Press Enter to return to the main menu: '
             )
