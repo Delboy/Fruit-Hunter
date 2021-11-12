@@ -85,20 +85,22 @@ I have tested this project by running the code through a validator at [Pep8onlin
 - Leaving the username blank warns the user that their name cannot be blank.
 - Entering numbers or any special character within the username notifies the user that only letters are allowed.
 - Entering a username above 15 characters long notifies the user that the name chosen is too long.
-- Entering a username will always display the name back to the user in lower case with the first letter capitalised regardless of what the case was when entered.  
+- Entering a username will always display the name back to the user in lower case with the first letter capitalised regardless of what the case was when entered.
 - When verifying the username the create user function will start over if the user inputs anything other than 'Y'.
 - Any blank spaces during name vaidation are ignored.
-- If the user verifies their chosen name they are then instructed to choose a PIN as intended.
-- If the user enters letters as a PIN, has a PIN longer than 4 digits, or leaves the PIN blank they are notified that the PIN must be 4 digits long and consist only of numbers.
-- If the verified PIN does not match the chosen PIN then the chosen PIN process is restarted.
+- When the user verifies their chosen name they are then instructed to choose a PIN as intended.
+- When the user enters letters as a PIN, has a PIN longer than 4 digits, or leaves the PIN blank they are notified that the PIN must be 4 digits long and consist only of numbers.
+- When the verified PIN does not match the chosen PIN then the chosen PIN process is restarted.
 - Once the chosen PIN and verified PIN match the user is taken to the main menu as intended.
-- Entering a username as LOGIN (not case sensitive) will take the user to the login page as intended.
+- Entering a username as LOGIN (not case sensitive) takes the user to the login page as intended.
+- Entering the username EXIT regardless of case takes you back to the welcome page.
 - The users worksheet in google sheets is correctly updated with username and PIN when user is created.
 
 ### Login Page
 - Entering any name that does not exist notifies the user that the name they've chosen does not exists and asks them whether they would like to create a user login.
 - If the user is asked whether they would like to create a user login and they choose 'Y' they are taken to the create user page as intended. If they choose 'N', the login page is restarted. Any other input notifies the user that the input is invalid and restarts the login page.
 - Entering a name that would of been invalid when creating a user notifies the user that the name is invalid.
+- Entering EXIT regardless of case takes you back to the welcome page.
 - Entering a name that exists regardless of case will then ask you for your PIN.
 - Entering anything other than the correct PIN number will notify the user that the PIN was incorrect and take them back to the beginning of the login page.
 - Entering spaces before or after username entry will be ignored.
@@ -118,22 +120,22 @@ I have tested this project by running the code through a validator at [Pep8onlin
 - Entering one letter regardless of case will either notify the user that the chosen letter is in the word or not.
 - Entering a letter that you have already chosen informs the user that they've already guessed that letter and to try again.
 - Entering EXIT in any case will return the user to the main menu as intended.
-- If the letter chosen is correct then any underscores that represent that letter will update to show this.
-- If the chosen letter is not in the word the lives display will update to show one less.
-- Entering more than one letter will register as the user trying to guess the whole word as intended.
-- If the users guess is incorrect they will be notified that it is not the word and the lives display will update to show one less.
-- If users guess is correct or there are no more letters left to guess then they are notified that they were successfull and asked if they want to play again. Any input other than 'ENTER' or 'N' will inform the user that the character was not recognised and will re-ask the question.
-- Hitting ENTER after a successfull round will begin another as intended.
-- Selecting 'N' after a successfull round will take the user back to the main menu as intended.
-- Losing all lives will display a message informing the user that they have lost and gives them the option to play again or go back to the main menu.
+- If the letter chosen is correct then any underscores that represent that letter update to show this.
+- If the chosen letter is not in the word the lives display update to show one less.
+- Entering more than three letters registers as the user trying to guess the whole word as intended.
+- If the users guess is incorrect they are notified that it is not the word and the lives display updates to show one less.
+- If users guess is correct or there are no more letters left to guess they are notified that they are successfull and asked if they want to play again. Any input other than 'ENTER' or 'N' informs the user that the character was not recognised and re-asks the question.
+- Hitting ENTER after a successfull round begins another as intended.
+- Selecting 'N' after a successfull round takes the user back to the main menu as intended.
+- Losing all lives displays a message informing the user that they have lost and gives them the option to play again or go back to the main menu.
 - When the user loses all lives and is asked if they want to play again or exit to the menu, any character other than 'Y' or 'N' informs the user that the character is not recognised and is asked again for an input.
-- If the user has collected all the fruit and tries to play a game they will be notified that they have already collected all fruit and if they wish to reset the fruits collected list to play again. If the user types 'RESET' regardless of case,  the list will be reset and another game will begin. If the user hits the ENTER key they will be returned to the menu.
+- When the user has collected all the fruit and tries to play a game they are notified that they have already collected all fruit and if they wish to reset the fruits collected list to play again. Typing 'RESET' regardless of case resets the list and another game begins. Hitting the ENTER key instead of resetting returns the user to the menu.
 - Confirmed that no fruits appear twice.
 - Guessing a fruit updates the correct cell in the users worksheet in google sheets.
 - Losing a life updates the correct cell in the users worksheet in google sheets.
 - Losing all lives updates the correct cell in the users worksheet in google sheets.
 - Guessing all fruits correctly updates the hof worksheet in google sheets.
-- ting the list wipes the correct cell in the user worksheet in google sheets.
+- Reseting the list wipes the correct cell in the user worksheet in google sheets.
 
 ### How to play
 - Hitting ENTER cycles through the rules of how to play and exits when finished as intended. Any typed inputs from the user are ignored.
@@ -141,15 +143,15 @@ I have tested this project by running the code through a validator at [Pep8onlin
 ### Fruits collected
 - The fruits collected page closes back to the menu as soon as the user hits ENTER as intended. Any typed inputs from the user are ignored.
 - The user is informed if they have 0 fruits collected. 
-- If the user has between 1 and 14 fruits the page will inform the user how many fruits they have found and will display each fruit collected. It will only display up to 5 fruits on each line.
-- If the user has collected all 15 fruits the page will congratulate the user and ask if they want the list to be reset. Typing RESET regardless of case, notifies the user the list has been reset and takes them back to the menu. Hitting the ENTER key takes the user back to the main menu. Any other input informs the user that it is not recognised and asks the user for an input again.
+- If the user has between 1 and 14 fruits they are informed of how many fruits they have found and each fruit collected will be displayed. It only display up to 5 fruits on each line as intended.
+- When the user has collected all 15 fruits the page congratulates the user and asks if they want the list to be reset. Typing RESET regardless of case, notifies the user the list has been reset and takes them back to the menu. Hitting the ENTER key takes the user back to the main menu. Any other input informs the user that it is not recognised and asks the user for an input again.
 - Any blank space before or after input is ignored.
 - Resetting the list wipes the correct cell in the user worksheet in google sheets.
 
 ### Hall of Fame
 - ENTER key will return user to main menu regardless of input.
 - Hall of fame displays top 5 users in order of lives lost, least to highest, as intended.
-- If there are less than 5 people who have reached the hall of fame the game will populate the spaces with underscores.
+- If there are less than 5 people who have reached the hall of fame the game populates the spaces with underscores.
 - Information gathered for the hall of fame is correctly gathered from the hof worksheet in google sheets.
 
 ## Further Testing

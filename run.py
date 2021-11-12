@@ -67,12 +67,12 @@ def create_user(username):
     if isinstance(username, str) is True:  # credit to stackoverflow
         user_name = username
     else:
-        user_name = input(
-            ' ' * 14 + 'Please choose a username or type LOGIN to sign in: '
-            )
-    while (len(user_name) > 15) or (user_name.lower() in users) or \
+        print(C('Please create a User Name'))
+        print(C('or type LOGIN to login'))
+        user_name = input(' ' * 32 + 'User Name: ').strip().lower()
+    while (len(user_name) > 15) or (user_name in users) or \
             (user_name == '') or (user_name.isalpha() is False) or \
-            (user_name.upper() == 'LOGIN'):
+            (user_name == 'login') or (user_name == 'exit'):
         if len(user_name) > 15:
             clear_console()
             print(BR * 8)
@@ -81,7 +81,7 @@ def create_user(username):
                 'Please keep under 15 characters.'
                 ))
             user_name = input(' ' * 27 + 'Please choose a username: ')
-        if user_name.lower() in users:
+        if user_name in users:
             clear_console()
             print(BR * 8)
             print(C('Sorry, that name is taken. Please try again.'))
@@ -96,8 +96,10 @@ def create_user(username):
             print(BR * 8)
             print(C('Sorry, only letters are allowed. Please try again.'))
             user_name = input(' ' * 27 + 'Please choose a username: ')
-        if user_name.upper() == 'LOGIN':
+        if user_name == 'login':
             login()
+        if user_name == 'exit':
+            welcome()
     # Validates username chosen.
     clear_console()
     print(BR * 8)
@@ -196,6 +198,8 @@ def login():
         print(C('Sorry that name is not valid. Please try again.'))
         time.sleep(3)
         login()
+    elif user_name == 'exit':
+        welcome()
     else:
         clear_console()
         print(BR * 8)
