@@ -41,10 +41,7 @@ def welcome():
     print(BR * 4)
     print(C('Welcome to FRUIT HUNTER!'))
     print(BR * 4)
-    try:
-        user_choice = input(' ' * 25 + 'Have you played before? Y/N: ').strip()
-    except:
-        print("EOF")
+    user_choice = input(' ' * 25 + 'Have you played before? Y/N: ').strip()
     if user_choice.upper() == 'Y':
         clear_console()
         login()
